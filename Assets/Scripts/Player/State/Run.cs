@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Run : State
 {
-    public Run(PlayerController player, PlayerAnimationHandler animationHandler) : base(player, animationHandler)
+    public Run(PlayerController player, PlayerAnimationHandler animationHandler)
+        : base(player, animationHandler)
     {
         applySpeed = player.runSpeed;
     }
@@ -17,7 +18,6 @@ public class Run : State
     {
         animationHandler.SetBool("Run", false);
     }
-
     public override void Update()
     {
         dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -26,8 +26,9 @@ public class Run : State
         Vector3 moveV = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * dir.z;
 
         moveVec = (moveH + moveV).normalized;
+        float timeScale = 1f / Time.timeScale;
 
-        player.rb.velocity = moveVec * applySpeed;
+        player.rb.velocity = moveVec * applySpeed * timeScale;
 
         if (dir != Vector3.zero)
         {
@@ -36,6 +37,10 @@ public class Run : State
             Vector3 rotate = Vector3.Scale((lookForward + lookRight).normalized, new Vector3(1, 0, 1));
 
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(rotate), Time.deltaTime * player.rotSpeed);
+        }
+        else
+        {
+            player.ChangeState(PlayerState.Idle);
         }
 
         if (!Input.GetButton("Run"))

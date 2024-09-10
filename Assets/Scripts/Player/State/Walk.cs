@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class Walk : State
 {
-    public Walk(PlayerController player, PlayerAnimationHandler animationHandler) : base(player, animationHandler)
+    public Walk(PlayerController player, PlayerAnimationHandler animationHandler)
+        : base(player, animationHandler)
     {
         applySpeed = player.walkSpeed;
     }
@@ -22,7 +22,6 @@ public class Walk : State
     {
         animationHandler.SetBool("Walk", false);
     }
-
     public override void Update()
     {
         dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -31,7 +30,8 @@ public class Walk : State
         Vector3 moveV = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * dir.z;
 
         moveVec = (moveH + moveV).normalized;
-        player.rb.velocity = moveVec * applySpeed;
+        float timeScale = 1f / Time.timeScale;
+        player.rb.velocity = moveVec * applySpeed * timeScale;
 
         if (dir != Vector3.zero)
         {
@@ -53,6 +53,10 @@ public class Walk : State
         if (Input.GetButtonDown("Jump"))
         {
             player.ChangeState(PlayerState.Jump);
+        }
+        if (Input.GetButtonDown("Crouch"))
+        {
+            player.ChangeState(PlayerState.Crouch);
         }
     }
 }
