@@ -8,10 +8,12 @@ public class Bow : BaseWeapon
     {
         this.player = player;
         this.animationHandler = animationHandler;
+        this.animationHandler.SetBool("Bow", true);
         UIManager.instance.SetCrossHair();
     }
     public override void Exit(Transform weaponPack)
     {
+        animationHandler.SetBool("Bow", false);
         UIManager.instance.SetCrossHair();
     }
 

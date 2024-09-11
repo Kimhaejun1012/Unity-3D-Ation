@@ -60,7 +60,15 @@ public class PlayerController : MonoBehaviour
     {
         currentState?.Update();
     }
+    void OnGUI()
+    {
+        GUIStyle guiStyle = new GUIStyle();
+        guiStyle.fontSize = 16;
+        guiStyle.normal.textColor = Color.green;
 
+        string statusText = "Player State: " + state.ToString();
+        GUI.Label(new Rect(10, 10, 300, 20), statusText, guiStyle);
+    }
     public void ChangeState(PlayerState newState)
     {
         currentState?.Exit();
