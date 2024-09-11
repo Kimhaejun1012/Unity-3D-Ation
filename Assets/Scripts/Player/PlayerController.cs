@@ -14,6 +14,7 @@ public enum PlayerState
     Crouch,
     JumpAttack,
     OnShield,
+    Dodge,
 }
 
 public class PlayerController : MonoBehaviour
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
         states.Add(new Crouch(this, animationrHandler));
         states.Add(new JumpAttack(this, animationrHandler));
         states.Add(new OnShield(this, animationrHandler));
+        states.Add(new Dodge(this, animationrHandler));
         SetStateIdle();
     }
 

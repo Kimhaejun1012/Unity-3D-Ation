@@ -5,7 +5,8 @@ using UnityEngine;
 public class Shield : BaseWeapon
 {
     private bool canParrying = false;
-    
+    private bool canDodge = false;
+
     public Vector3 projectileVelocity;
     public GameObject parryingPrefab;
     public GameObject projectile;
@@ -42,8 +43,19 @@ public class Shield : BaseWeapon
             }
             animationHandler.SetTrigger("Parrying");
         }
+        if (Input.GetKeyDown(KeyCode.Space) && player.state == PlayerState.OnShield)
+        {
+            if(canDodge)
+            {
+                player.ChangeState(PlayerState.Dodge);
+                Debug.Log("회피 성공");
+            }
+            else
+            {
+                Debug.Log("회피 실패");
+            }
+        }
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Projectile"))
@@ -52,6 +64,10 @@ public class Shield : BaseWeapon
             projectileVelocity = projectile.transform.GetComponent<Rigidbody>().velocity;
             canParrying = true;
         }
+        else if(other.CompareTag("MonsterWeapon"))
+        {
+            canDodge = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -59,6 +75,10 @@ public class Shield : BaseWeapon
         {
             projectile = null;
             canParrying = false;
+        }
+        else if (other.CompareTag("MonsterWeapon"))
+        {
+            canDodge = false;
         }
     }
 }
