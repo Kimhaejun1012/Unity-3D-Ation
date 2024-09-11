@@ -22,12 +22,12 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         myWeapon = Instantiate(myWeapon);
-        myWeapon.transform.SetParent(rightWeaponPoint, false);
+        myWeapon.transform.SetParent(leftWeaponPoint, false);
         myWeapon.Init(player, animationHandler);
 
-        myShield = Instantiate(myShield);
-        myShield.transform.SetParent(leftWeaponPoint, false);
-        myShield.Init(player, animationHandler);
+        //myShield = Instantiate(myShield);
+        //myShield.transform.SetParent(leftWeaponPoint, false);
+        //myShield.Init(player, animationHandler);
     }
 
     void Update()

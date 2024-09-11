@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Walk : State
 {
+    float smoothHorizontal = 0f;
+    float smoothVertical = 0f;
     public Walk(PlayerController player, PlayerAnimationHandler animationHandler)
         : base(player, animationHandler)
     {
@@ -32,6 +34,11 @@ public class Walk : State
         moveVec = (moveH + moveV).normalized;
         float timeScale = 1f / Time.timeScale;
         player.rb.velocity = moveVec * applySpeed * timeScale;
+
+        smoothHorizontal = Mathf.Lerp(smoothHorizontal, dir.x, 10f * Time.deltaTime);
+        smoothVertical = Mathf.Lerp(smoothVertical, dir.z, 10f * Time.deltaTime);
+        animationHandler.SetFloat("BlendX", smoothHorizontal);
+        animationHandler.SetFloat("BlendY", smoothVertical);
 
         if (dir != Vector3.zero)
         {

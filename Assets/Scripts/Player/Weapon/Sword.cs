@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Sword : BaseWeapon
 {
-    public override void Exit(Transform weaponPack)
-    {
-    }
-
     public override void Init(PlayerController player, PlayerAnimationHandler animationHandler)
     {
         this.player = player;
         this.animationHandler = animationHandler;
+        animationHandler.SetBool("Sword", true);
+    }
+    public override void Exit(Transform weaponPack)
+    {
+        animationHandler.SetBool("Sword", false);
     }
 
     public override void Using()

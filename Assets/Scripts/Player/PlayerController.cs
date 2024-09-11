@@ -10,6 +10,7 @@ public enum PlayerState
     Run,
     Jump,
     Attack,
+    Aim,
     Crouch,
     JumpAttack,
     OnShield,
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
         states.Add(new Run(this, animationrHandler));
         states.Add(new Jump(this, animationrHandler));
         states.Add(new Attack(this, animationrHandler));
+        states.Add(new Aim(this, animationrHandler));
         states.Add(new Crouch(this, animationrHandler));
         states.Add(new JumpAttack(this, animationrHandler));
         states.Add(new OnShield(this, animationrHandler));
