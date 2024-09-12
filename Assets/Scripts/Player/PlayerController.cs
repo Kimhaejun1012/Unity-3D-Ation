@@ -8,13 +8,15 @@ public enum PlayerState
     Idle,
     Walk,
     Run,
-    Jump,
     Attack,
     Aim,
     Crouch,
     JumpAttack,
     OnShield,
     Dodge,
+    Air,
+    AirAim,
+    DodgeAttack,
 }
 
 public class PlayerController : MonoBehaviour
@@ -48,13 +50,15 @@ public class PlayerController : MonoBehaviour
         states.Add(new Idle(this, animationrHandler));
         states.Add(new Walk(this, animationrHandler));
         states.Add(new Run(this, animationrHandler));
-        states.Add(new Jump(this, animationrHandler));
         states.Add(new Attack(this, animationrHandler));
         states.Add(new Aim(this, animationrHandler));
         states.Add(new Crouch(this, animationrHandler));
         states.Add(new JumpAttack(this, animationrHandler));
         states.Add(new OnShield(this, animationrHandler));
         states.Add(new Dodge(this, animationrHandler));
+        states.Add(new Air(this, animationrHandler));
+        states.Add(new AirAim(this, animationrHandler));
+        states.Add(new DodgeAttack(this, animationrHandler));
         SetStateIdle();
     }
 
@@ -82,5 +86,17 @@ public class PlayerController : MonoBehaviour
     public void SetStateIdle()
     {
         ChangeState(PlayerState.Idle);
+    }
+    public void PlayerJump()
+    {
+        animationrHandler.SetTrigger("Jump");
+        Vector3 jumpForce = Vector3.up * jumpPower;
+        rb.AddForce(jumpForce, ForceMode.VelocityChange);
+
+        ChangeState(PlayerState.Air);
+    }
+    public void SetStateAir()
+    {
+        ChangeState(PlayerState.Air);
     }
 }

@@ -15,18 +15,18 @@ public class Shield : BaseWeapon
         this.player = player;
         this.animationHandler = animationHandler;
     }
-    public override void Exit(Transform weaponPack)
+    public override void Exit()
     {
     }
     public override void Using()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            player.ChangeState(PlayerState.OnShield);
+            HandleMouseDown();
         }
         if (Input.GetMouseButtonUp(1))
         {
-            player.SetStateIdle();
+            HandleMouseUp();
         }
         if (Input.GetKeyDown(KeyCode.E) && player.state == PlayerState.OnShield)
         {
@@ -54,6 +54,29 @@ public class Shield : BaseWeapon
             {
                 Debug.Log("회피 실패");
             }
+        }
+    }
+    private void HandleMouseDown()
+    {
+        switch (player.state)
+        {
+            case PlayerState.Idle:
+            case PlayerState.Walk:
+                player.ChangeState(PlayerState.OnShield);
+                break;
+            case PlayerState.Dodge:
+                break;
+            case PlayerState.Air:
+                break;
+        }
+    }
+    private void HandleMouseUp()
+    {
+        switch (player.state)
+        {
+            case PlayerState.OnShield:
+                player.SetStateIdle();
+                break;
         }
     }
     private void OnTriggerEnter(Collider other)

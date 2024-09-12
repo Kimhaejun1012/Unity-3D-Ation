@@ -49,8 +49,7 @@ public class Run : State
         }
         if (Input.GetButtonDown("Jump"))
         {
-            animationHandler.SetTrigger("Jump");
-            player.ChangeState(PlayerState.Jump);
+            player.PlayerJump();
         }
     }
 }

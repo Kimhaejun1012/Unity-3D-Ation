@@ -59,7 +59,7 @@ public class Walk : State
         }
         if (Input.GetButtonDown("Jump"))
         {
-            player.ChangeState(PlayerState.Jump);
+            player.PlayerJump();
         }
         if (Input.GetButtonDown("Crouch"))
         {

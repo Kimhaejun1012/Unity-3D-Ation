@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jump : State
+public class Air : State
 {
-    public Jump(PlayerController player, PlayerAnimationHandler animationHandler) : base(player, animationHandler) { }
-
+    public Air(PlayerController player, PlayerAnimationHandler animationHandler)
+        : base(player, animationHandler)
+    {
+    }
     public override void Enter()
     {
-        animationHandler.SetTrigger("Jump");
-        Vector3 jumpForce = Vector3.up * player.jumpPower;
-        player.rb.AddForce(jumpForce, ForceMode.VelocityChange);
     }
 
     public override void Exit()

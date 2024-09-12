@@ -8,9 +8,9 @@ public class Sword : BaseWeapon
     {
         this.player = player;
         this.animationHandler = animationHandler;
-        animationHandler.SetBool("Sword", true);
+        this.animationHandler.SetBool("Sword", true);
     }
-    public override void Exit(Transform weaponPack)
+    public override void Exit()
     {
         animationHandler.SetBool("Sword", false);
     }
@@ -29,11 +29,21 @@ public class Sword : BaseWeapon
                 case PlayerState.Run:
                     animationHandler.SetTrigger("Attack");
                     break;
-                case PlayerState.Jump:
+                case PlayerState.Air:
                     animationHandler.SetTrigger("Attack");
                     player.ChangeState(PlayerState.JumpAttack);
                     break;
                 case PlayerState.Attack:
+                    animationHandler.SetTrigger("Attack");
+                    break;
+                case PlayerState.Dodge:
+                    //if (!Physics.Raycast(player.transform.position + Vector3.up * 0.2f, Vector3.down, 0.2f, player.groundLayer))
+                    //{
+                        player.ChangeState(PlayerState.DodgeAttack);
+                    animationHandler.SetTrigger("Attack");
+                    //}
+                    break;
+                case PlayerState.DodgeAttack:
                     animationHandler.SetTrigger("Attack");
                     break;
                 default:

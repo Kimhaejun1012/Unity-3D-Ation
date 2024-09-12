@@ -31,8 +31,7 @@ public class Idle : State
         }
         if (Input.GetButtonDown("Jump"))
         {
-            animationHandler.SetTrigger("Jump");
-            player.ChangeState(PlayerState.Jump);
+            player.PlayerJump();
         }
         if (Input.GetButtonDown("Crouch"))
         {
