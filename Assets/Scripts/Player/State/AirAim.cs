@@ -12,11 +12,13 @@ public class AirAim : State
     public override void Enter()
     {
         animationHandler.SetTrigger("AirAim");
+        TimeManager.instance.ApplySlowMotion();
     }
 
     public override void Exit()
     {
         animationHandler.ResetTrigger("Attack");
+        TimeManager.instance.SetTimeScaleOne();
     }
 
     public override void Update()

@@ -6,7 +6,7 @@ public class DodgeAttack : State
     private float approachDistance = 2f;
     bool isArrive = false;
     bool isLanding = false;
-    private float speed = 3f;
+    private float speed = 5f;
 
     public DodgeAttack(PlayerController player, PlayerAnimationHandler animationHandler)
         : base(player, animationHandler)

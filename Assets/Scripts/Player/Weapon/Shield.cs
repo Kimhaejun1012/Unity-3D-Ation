@@ -48,11 +48,9 @@ public class Shield : BaseWeapon
             if(canDodge)
             {
                 player.ChangeState(PlayerState.Dodge);
-                Debug.Log("회피 성공");
             }
             else
             {
-                Debug.Log("회피 실패");
             }
         }
     }
