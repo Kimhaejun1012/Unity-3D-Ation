@@ -1,18 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.XR;
 
-public class SequenceNode : MonoBehaviour
+public sealed class SequenceNode : Node
 {
-    // Start is called before the first frame update
-    void Start()
+    public SequenceNode(string name) : base(name) { }
+    public override NodeState Evaluate()
     {
-        
-    }
+        if (_childs == null || _childs.Count == 0)
+            return NodeState.Failure;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (var child in _childs)
+        {
+            switch (child.Evaluate())
+            {
+                case NodeState.Running:
+                    return NodeState.Running;
+                case NodeState.Success:
+                    continue;
+                case NodeState.Failure:
+                    return NodeState.Failure;
+            }
+        }
+
+        return NodeState.Success;
     }
 }

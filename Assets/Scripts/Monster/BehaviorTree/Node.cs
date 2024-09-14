@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node : MonoBehaviour
+public enum NodeState
 {
-    void Start()
+    Running,
+    Success,
+    Failure,
+}
+public abstract class Node
+{
+    public List<Node> _childs = new();
+    public string name;
+    protected int childCount;
+    public Node(string name)
     {
-        
+        this.name = name;
     }
 
-    void Update()
-    {
-        
-    }
+    public abstract NodeState Evaluate();
+
+    public void AddChild(Node node) => _childs.Add(node);
 }
