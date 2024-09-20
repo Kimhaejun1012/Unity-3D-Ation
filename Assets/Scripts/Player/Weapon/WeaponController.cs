@@ -59,6 +59,16 @@ public class WeaponController : MonoBehaviour
         myShield.transform.SetParent(leftWeaponPoint, false);
         myShield.Init(player, animationHandler);
     }
+
+    public void ActivateCollider()
+    {
+        myWeapon.GetComponent<CapsuleCollider>().enabled = true;
+    }
+    public void DeactivateCollider()
+    {
+        myWeapon.GetComponent<CapsuleCollider>().enabled = false;
+    }
+
     public void ChangeWeapon()
     {
         DestoryPreWeapon();

@@ -10,7 +10,7 @@ public class Arrow : MonoBehaviour
     public int damage = 5;
 
     readonly float power = 30;
-    readonly bool isHit = false;
+    bool isHit = false;
 
     public void Awake()
     {
@@ -32,5 +32,29 @@ public class Arrow : MonoBehaviour
         transform.position = pos;
         transform.forward = bowForward;
         rb.AddForce(transform.forward * power, ForceMode.Impulse);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Monster") && !isHit)
+        {
+            IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+            damageable?.TakeDamage(damage);
+            var effect = ObjectPoolManager.instance.GetPool("HitEffect");
+            effect.transform.position = collision.contacts[0].point;
+        }
+        isHit = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !isHit)
+        {
+            IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
+            damageable?.TakeDamage(damage);
+            var effect = ObjectPoolManager.instance.GetPool("HitEffect");
+            effect.transform.position = other.ClosestPoint(transform.position);
+            isHit = true;
+        }
     }
 }

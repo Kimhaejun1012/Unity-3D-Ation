@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33732668498054106}
   - component: {fileID: 23590991179431624}
   - component: {fileID: -5611810049798427785}
+  - component: {fileID: -4422001024259531994}
   m_Layer: 0
   m_Name: Sword_OH
   m_TagString: Untagged
@@ -96,3 +97,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036cfad6de018404bbaae4bb3902ba96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+--- !u!136 &-4422001024259531994
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037715513984232}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.13
+  m_Height: 1.05
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.58}

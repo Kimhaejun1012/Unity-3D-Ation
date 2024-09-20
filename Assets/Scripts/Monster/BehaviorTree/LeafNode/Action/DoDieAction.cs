@@ -20,6 +20,7 @@ public class DoDieAction : Node
         if (animator != null)
         {
             animator.SetTrigger("Die");
+            animator.GetComponent<MonsterAI>().DestroyMonsterAI();
             return NodeState.Success;
         }
         return NodeState.Failure;

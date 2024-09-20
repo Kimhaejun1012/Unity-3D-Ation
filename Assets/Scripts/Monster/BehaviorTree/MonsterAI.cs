@@ -142,4 +142,10 @@ public class MonsterAI : MonoBehaviour
 
         dectedSelector.AddChild(moveSequence);
     }
+
+    public void DestroyMonsterAI()
+    {
+        Destroy(GetComponent<CapsuleCollider>());
+        Destroy(this);
+    }
 }

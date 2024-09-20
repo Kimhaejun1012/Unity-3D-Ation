@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Sword : BaseWeapon
 {
+    public int damage = 100;
+
     public override void Init(PlayerController player, PlayerAnimationHandler animationHandler)
     {
         this.player = player;
@@ -49,6 +51,16 @@ public class Sword : BaseWeapon
                 default:
                     break;
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            IDamageable damageable = other.GetComponent<IDamageable>();
+            damageable?.TakeDamage(damage);
+            var effect = ObjectPoolManager.instance.GetPool("HitEffect");
+            effect.transform.position = other.ClosestPoint(transform.position);
         }
     }
 }
