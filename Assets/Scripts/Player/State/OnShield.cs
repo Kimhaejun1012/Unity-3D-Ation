@@ -22,13 +22,14 @@ public class OnShield : State
 
     public override void Update()
     {
-
         if(!animationHandler.IsAnimationRunning("Parrying"))
         {
             dir.z = Input.GetAxis("Vertical");
 
             smoothVertical = Mathf.Lerp(smoothVertical, dir.z, 10f * Time.deltaTime);
-
+            float cameraY = Camera.main.transform.eulerAngles.y;
+            Quaternion targetRotationY = Quaternion.Euler(0f, cameraY, 0f);
+            player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotationY, Time.deltaTime * 30f);
             player.rb.velocity = player.transform.forward * (dir.z * applySpeed);
 
             animationHandler.SetFloat("BlendY", smoothVertical);

@@ -10,11 +10,11 @@ public class Air : State
     }
     public override void Enter()
     {
+        animationHandler.ResetTrigger("Landing");
     }
 
     public override void Exit()
     {
-        animationHandler.ResetTrigger("Landing");
     }
 
     public override void Update()
@@ -24,6 +24,7 @@ public class Air : State
             if (Physics.Raycast(player.transform.position + Vector3.up * 0.2f, Vector3.down, 0.2f, player.groundLayer))
             {
                 animationHandler.SetTrigger("Landing");
+                player.SetStateIdle();
             }
         }
     }

@@ -69,7 +69,6 @@ public class Bow : BaseWeapon
     void PerformAttack()
     {
         animationHandler.SetTrigger("Attack");
-        Shot();
     }
     public void Shot()
     {

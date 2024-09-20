@@ -34,8 +34,9 @@ public class Shield : BaseWeapon
             {
                 var temp = Instantiate(parryingPrefab, transform.position, Quaternion.identity);
                 temp.GetComponent<Rigidbody>().AddForce(-projectileVelocity * 10f, ForceMode.Impulse);
-                Destroy(projectile);
-                Debug.Log(" 패링 성공 ");
+                Destroy(projectile.gameObject);
+                TimeManager.instance.ParryingSlowMotion();
+                canParrying = false;
             }
             else
             {

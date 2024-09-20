@@ -8,10 +8,13 @@ public class MoveToDetectEnemy : Node
     Blackboard _blackboard;
 
     Animator animator;
+    int speed;
     public MoveToDetectEnemy(string name, Blackboard blackboard) : base(name)
     {
         _blackboard = blackboard;
         animator = _blackboard.GetValue<Animator>("Animator");
+
+        speed = _blackboard.GetValue<int>("WalkSpeed");
     }
 
     public override NodeState Evaluate()
@@ -23,7 +26,7 @@ public class MoveToDetectEnemy : Node
             animator.SetBool("Walk", false);
             return NodeState.Success;
         }
-        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * 10);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);
         transform.LookAt(target);
         animator.SetBool("Walk", true);
         return NodeState.Running;

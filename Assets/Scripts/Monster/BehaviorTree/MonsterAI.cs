@@ -82,7 +82,6 @@ public class MonsterAI : MonoBehaviour
 
     Blackboard BlackBoardInit()
     {
-
         var animator = GetComponent<Animator>();
         var transform = GetComponent<Transform>();
         var rigidbody = GetComponent<Rigidbody>();
@@ -93,6 +92,8 @@ public class MonsterAI : MonoBehaviour
         blackboard.SetValue("Rigidbody", rigidbody);
         blackboard.SetValue("Rigidbody", rigidbody);
         blackboard.SetValue("ActorStats", actorStats);
+        blackboard.SetValue("WalkSpeed", 5);
+        blackboard.SetValue("DashSpeed", 10);
 
         return blackboard;
     }

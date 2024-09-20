@@ -6,7 +6,10 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager instance = null;
     public Animator animator;
+
     float slowFactor = 0.3f;
+    float slowMotionDuration = 0.5f;
+    float transitionDuration = 1f;
     void Awake()
     {
         if (instance == null)
@@ -33,5 +36,33 @@ public class TimeManager : MonoBehaviour
     {
         Time.timeScale = 1;
         animator.speed = 1;
+    }
+    public void ParryingSlowMotion()
+    {
+        StartCoroutine(ParryingSlowMotionCoroutine());
+    }
+    private IEnumerator ParryingSlowMotionCoroutine()
+    {
+        float originalTimeScale = Time.timeScale;
+        float originalFixedDeltaTime = Time.fixedDeltaTime;
+
+        Time.timeScale = slowFactor;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        yield return null;
+
+        Time.timeScale = slowFactor;
+
+        yield return new WaitForSecondsRealtime(slowMotionDuration);
+        float elapsedTime = 0;
+        while (elapsedTime < transitionDuration)
+        {
+            Time.timeScale = Mathf.Lerp(slowFactor, originalTimeScale, elapsedTime / transitionDuration);
+            Time.fixedDeltaTime = originalFixedDeltaTime * Time.timeScale;
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        Time.timeScale = originalTimeScale;
+        Time.fixedDeltaTime = originalFixedDeltaTime;
     }
 }

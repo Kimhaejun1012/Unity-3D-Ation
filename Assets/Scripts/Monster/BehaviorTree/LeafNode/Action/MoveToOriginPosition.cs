@@ -8,6 +8,7 @@ public class MoveToOriginPosition : Node
     Blackboard _blackboard;
 
     Animator animator;
+    private int speed;
     Vector3 _originPos;
     
     public MoveToOriginPosition(string name, Vector3 originPos, Blackboard blackboard) : base(name)
@@ -15,6 +16,8 @@ public class MoveToOriginPosition : Node
         _blackboard = blackboard;
         _originPos = originPos;
         animator = _blackboard.GetValue<Animator>("Animator");
+        speed = _blackboard.GetValue<int>("WalkSpeed");
+
     }
 
     public override NodeState Evaluate()
@@ -28,7 +31,7 @@ public class MoveToOriginPosition : Node
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, _originPos, Time.deltaTime * 10);
+            transform.position = Vector3.MoveTowards(transform.position, _originPos, Time.deltaTime * speed);
             transform.LookAt(_originPos);
             animator.SetBool("Walk", true);
             return NodeState.Running;

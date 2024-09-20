@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Dodge : State
 {
-    float upPower = 6f;
-    float backPower = 3f;
+    float upPower = 4f;
+    float backPower = 2f;
     public Dodge(PlayerController player, PlayerAnimationHandler animationHandler) : base(player, animationHandler)
     {
     }

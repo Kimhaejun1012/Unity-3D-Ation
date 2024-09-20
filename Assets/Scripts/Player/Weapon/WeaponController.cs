@@ -68,6 +68,10 @@ public class WeaponController : MonoBehaviour
     {
         myWeapon.GetComponent<CapsuleCollider>().enabled = false;
     }
+    public void BowShot()
+    {
+        myWeapon.GetComponent<Bow>().Shot();
+    }
 
     public void ChangeWeapon()
     {

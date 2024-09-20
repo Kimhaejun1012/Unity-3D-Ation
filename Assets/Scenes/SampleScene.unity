@@ -13757,7 +13757,7 @@ MonoBehaviour:
   crouchSpeed: 2
   aimSpeed: 3
   walkSpeed: 5
-  runSpeed: 20
+  runSpeed: 10
   rotSpeed: 10
   jumpPower: 5
   dashPower: 5
@@ -16938,10 +16938,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e729535a924b44d8d73c17094e9a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rangeAttackCoolTime: 100
+  rangeAttackCoolTime: 2
   bowAttackCastingTime: 3
   fireBallCastingTime: 3
-  meleeAttackCoolTime: 100
+  meleeAttackCoolTime: 2
 --- !u!114 &5268267032977711362
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,13 +9,15 @@ public class DoRushTarget : Node
     Blackboard _blackboard;
     Animator animator;
 
-    float speed = 10f;
+    float speed;
     float dashAttackRange = 5f;
 
     public DoRushTarget(string name, Blackboard blackboard) : base(name)
     {
         _blackboard = blackboard;
         animator = _blackboard.GetValue<Animator>("Animator");
+
+        speed = _blackboard.GetValue<int>("DashSpeed");
     }
 
     public override NodeState Evaluate()
