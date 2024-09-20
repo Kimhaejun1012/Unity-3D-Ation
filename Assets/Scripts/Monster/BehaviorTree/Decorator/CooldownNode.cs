@@ -9,7 +9,7 @@ public class CooldownNode : Node
 {
     Node _node;
     private float cooldownTime;
-    private float lastTime;
+    private float curTime;
 
     StringBuilder coolDown = new StringBuilder();
     public CooldownNode(string name, float cooldown, Node node) : base(name)
@@ -24,15 +24,16 @@ public class CooldownNode : Node
 
     public override NodeState Evaluate()
     {
-        float remainingTime = Mathf.Max(0, (lastTime + cooldownTime) - Time.time);
+        float remainingTime = cooldownTime - curTime;
         coolDown.Clear();
         coolDown.AppendFormat("{0}: {1:F1}", name, remainingTime);
-        if (Time.time > lastTime + cooldownTime)
+        curTime += Time.deltaTime;
+        if (curTime > cooldownTime)
         {
             _node.nodeState = _node.Evaluate();
             if (_node.nodeState == NodeState.Success)
             {
-                lastTime = Time.time;
+                curTime = 0;
             }
             return _node.nodeState;
         }

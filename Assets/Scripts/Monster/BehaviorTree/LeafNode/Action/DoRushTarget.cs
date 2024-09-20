@@ -22,7 +22,8 @@ public class DoRushTarget : Node
     {
         var transform = _blackboard.GetValue<Transform>("Transform");
         var target = _blackboard.GetValue<Transform>("Target");
-        if (Vector3.Distance(transform.position, target.position) <= dashAttackRange)
+
+        if (Vector3.Distance(transform.position, target.position) >= dashAttackRange)
         {
             animator.SetTrigger("Dash");
             transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);

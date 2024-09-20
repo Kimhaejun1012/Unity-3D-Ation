@@ -17,6 +17,10 @@ public class DoFireBallAttackCasting : Node
     public override NodeState Evaluate()
     {
         animator.SetTrigger("FireBallCasting");
+        if (animator.GetBool("Attacking"))
+        {
+            animator.ResetTrigger("FireBallCasting");
+        }
         return NodeState.Success;
     }
 }

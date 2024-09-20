@@ -17,6 +17,10 @@ public class DoBowAttackCasting : Node
     public override NodeState Evaluate()
     {
         animator.SetTrigger("BowAttackCasting");
+        if (animator.GetBool("Attacking"))
+        {
+            animator.ResetTrigger("BowAttackCasting");
+        }
         return NodeState.Success;
     }
 }

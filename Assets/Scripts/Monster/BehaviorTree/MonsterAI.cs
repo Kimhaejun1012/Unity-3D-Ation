@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -8,6 +9,12 @@ public class MonsterAI : MonoBehaviour
     BehaviorTreeRunner BTrunner;
     Blackboard blackboard = new();
     Vector3 originPos;
+
+    [SerializeField] float rangeAttackCoolTime = 10f;
+    [SerializeField] float bowAttackCastingTime = 3f;
+    [SerializeField] float fireBallCastingTime = 3f;
+    [SerializeField] float meleeAttackCoolTime = 5f;
+
     private void Start()
     {
         originPos = transform.position;
@@ -95,15 +102,15 @@ public class MonsterAI : MonoBehaviour
         SelectorNode dectedSelector = new("DectedSelector");
 
         RandomSelectorNode randomSelector = new("RangeAttackRandomSelector");
-        CooldownNode rangeAttackCoolDown = new("RangeAttackCoolDown", 105f, randomSelector);
+        CooldownNode rangeAttackCoolDown = new("RangeAttackCoolDown", rangeAttackCoolTime, randomSelector);
 
         SequenceNode fireBallSequence = new("FireBallSequence");
         fireBallSequence.AddChild(new DoFireBallAttackCasting("WaitFireBallAttack", blackboard));
-        fireBallSequence.AddChild(new CooldownNode("FireBallCoolDown", 3f, new DoFireBallAttack("FireBall", blackboard)));
+        fireBallSequence.AddChild(new DelayNode("FireBallDelay", fireBallCastingTime, new DoFireBallAttack("FireBall", blackboard)));
 
         SequenceNode bowAttackSequence = new("BowAttackSequence");
-        bowAttackSequence.AddChild(new DoFireBallAttackCasting("WaitBowAttack", blackboard));
-        bowAttackSequence.AddChild(new CooldownNode("BowCoolDown", 3f, new DoBowAttack("BowAttack", blackboard)));
+        bowAttackSequence.AddChild(new DoBowAttackCasting("WaitBowAttack", blackboard));
+        bowAttackSequence.AddChild(new DelayNode("BowDelay", bowAttackCastingTime, new DoBowAttack("BowAttack", blackboard)));
 
         SequenceNode dashAttackSequence = new("DashAttackSequence");
         dashAttackSequence.AddChild(new DoRushTarget("DoRushTarget", blackboard));
@@ -124,7 +131,7 @@ public class MonsterAI : MonoBehaviour
         meleeAttackSequence.AddChild(new CheckMeleeAttacking("CheckMeleeAttacking", blackboard));
         meleeAttackSequence.AddChild(new CheckEnemyWithinMeleeAttackRange("CheckEnemyWithinMeleeAttackRange", blackboard));
         CooldownNode cooldownNode =
-            new CooldownNode("MeleeAttackCoolDown", 5f, new DoMeleeAttack("DoMeleeAttack", blackboard));
+            new CooldownNode("MeleeAttackCoolDown", meleeAttackCoolTime, new DoMeleeAttack("DoMeleeAttack", blackboard));
         meleeAttackSequence.AddChild(cooldownNode);
 
         dectedSelector.AddChild(meleeAttackSequence);

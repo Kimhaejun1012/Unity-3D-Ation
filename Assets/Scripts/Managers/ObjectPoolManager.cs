@@ -27,6 +27,8 @@ public class ObjectPoolManager : MonoBehaviour
     private void InitializePools()
     {
         CreatePool("Arrow", "Projectiles/Arrow", poolSize);
+        CreatePool("FireBall", "Projectiles/FireBall", poolSize);
+        CreatePool("MonsterArrow", "Projectiles/MonsterArrow", poolSize);
     }
 
     private void CreatePool(string poolKey, string resourcePath, int poolSize)
