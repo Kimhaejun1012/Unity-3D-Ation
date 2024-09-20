@@ -14,14 +14,16 @@ public sealed class SequenceNode : Node
             switch (child.Evaluate())
             {
                 case NodeState.Running:
+                    child.nodeState = NodeState.Running;
                     return NodeState.Running;
                 case NodeState.Success:
+                    child.nodeState = NodeState.Success;
                     continue;
                 case NodeState.Failure:
+                    child.nodeState = NodeState.Failure;
                     return NodeState.Failure;
             }
         }
-
         return NodeState.Success;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum NodeState
 {
+    Ready,
     Running,
     Success,
     Failure,
@@ -11,6 +12,7 @@ public enum NodeState
 public abstract class Node
 {
     public List<Node> _childs = new();
+    public NodeState nodeState;
     public string name;
     protected int childCount;
     public Node(string name)

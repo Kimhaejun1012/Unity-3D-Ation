@@ -14,9 +14,14 @@ public sealed class SelectorNode : Node
             switch (child.Evaluate())
             {
                 case NodeState.Running:
+                    child.nodeState = NodeState.Running;
                     return NodeState.Running;
                 case NodeState.Success:
+                    child.nodeState = NodeState.Success;
                     return NodeState.Success;
+                case NodeState.Failure:
+                    child.nodeState = NodeState.Failure;
+                    continue;
             }
         }
         return NodeState.Failure;

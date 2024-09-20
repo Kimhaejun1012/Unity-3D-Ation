@@ -1,21 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MoveToDetectEnemy : Node
 {
-    public MoveToDetectEnemy(string name) : base(name)
+    Blackboard _blackboard;
+
+    Animator animator;
+    public MoveToDetectEnemy(string name, Blackboard blackboard) : base(name)
     {
+        _blackboard = blackboard;
+        animator = _blackboard.GetValue<Animator>("Animator");
     }
 
     public override NodeState Evaluate()
     {
-        if (Vector3.SqrMagnitude(MonsterManager.instance.transform_P.position - MonsterManager.instance.transform_M.position) < (5 * 5))
+        var transform = _blackboard.GetValue<Transform>("Transform");
+        var target = _blackboard.GetValue<Transform>("Target");
+        if (Vector3.SqrMagnitude(transform.position - target.position) < (2 * 2))
         {
+            animator.SetBool("Walk", false);
             return NodeState.Success;
         }
-
-        MonsterManager.instance.transform_M.position = Vector3.MoveTowards(MonsterManager.instance.transform_M.position, MonsterManager.instance.transform_P.position, Time.deltaTime * 10);
+        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * 10);
+        transform.LookAt(target);
+        animator.SetBool("Walk", true);
         return NodeState.Running;
     }
 }
