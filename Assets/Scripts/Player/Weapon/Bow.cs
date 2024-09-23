@@ -73,6 +73,6 @@ public class Bow : BaseWeapon
     public void Shot()
     {
         var arrow = ObjectPoolManager.instance.GetPool("Arrow");
-        arrow.GetComponent<Arrow>().Init(transform.position);
+        arrow.GetComponent<Arrow>().Init(transform.position, weaponStats.damage);
     }
 }

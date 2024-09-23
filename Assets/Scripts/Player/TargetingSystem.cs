@@ -70,7 +70,6 @@ public class TargetingSystem : MonoBehaviour
 
         foreach (Collider hit in hits)
         {
-            Debug.Log("범위 안에 들어온 오브젝트 = " + hit.name);
             Vector3 directionToTarget = hit.transform.position - player.position;
             float angle = Vector3.Angle(directionToTarget, player.forward);
 

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterArrow : MonoBehaviour
+public class MonsterArrow : MonoBehaviour, IProjectile
 {
     public bool isShoot = false;
     public float power = 30f;
     Rigidbody rb;
+
+    public Transform attacker;
     public Transform target;
     void Start()
     {
@@ -45,5 +47,15 @@ public class MonsterArrow : MonoBehaviour
             yield return null;
         }
         transform.localScale = targetScale;
+    }
+
+    public void SetAttacker(Transform transform)
+    {
+        attacker = transform;
+    }
+
+    public Transform GetAttacker()
+    {
+        return attacker;
     }
 }

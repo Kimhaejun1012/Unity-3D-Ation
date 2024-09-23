@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     PlayerAnimationHandler animationrHandler;
     State currentState;
 
+    [SerializeField] bool onGUI;
+
     public LayerMask groundLayer;
     List<State> states = new();
 
@@ -68,12 +70,15 @@ public class PlayerController : MonoBehaviour
     }
     void OnGUI()
     {
-        GUIStyle guiStyle = new GUIStyle();
-        guiStyle.fontSize = 16;
-        guiStyle.normal.textColor = Color.green;
+        if(onGUI)
+        {
+            GUIStyle guiStyle = new GUIStyle();
+            guiStyle.fontSize = 16;
+            guiStyle.normal.textColor = Color.green;
 
-        string statusText = "Player State: " + state.ToString();
-        GUI.Label(new Rect(10, 10, 300, 20), statusText, guiStyle);
+            string statusText = "Player State: " + state.ToString();
+            GUI.Label(new Rect(10, 10, 300, 20), statusText, guiStyle);
+        }
     }
     public void ChangeState(PlayerState newState)
     {

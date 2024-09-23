@@ -14,6 +14,7 @@ public class SkillHandler : MonoBehaviour
     GameObject curArrow;
     Action attackAction;
     [SerializeField] Transform targetPos;
+    [SerializeField] Transform attackerPos;
 
     private void Start()
     {
@@ -31,6 +32,7 @@ public class SkillHandler : MonoBehaviour
     {
         curArrow = ObjectPoolManager.instance.GetPool("MonsterArrow");
         curArrow.GetComponent<MonsterArrow>().Init(targetPos, arrowPos.position);
+        curArrow.GetComponent<IProjectile>().SetAttacker(attackerPos);
         attackAction = curArrow.GetComponent<MonsterArrow>().Shot;
     }
     public void ArrowShot()
@@ -42,15 +44,18 @@ public class SkillHandler : MonoBehaviour
     {
         var fireball1 = ObjectPoolManager.instance.GetPool("FireBall");
         fireball1.GetComponent<FireBall>().Init(targetPos, fireBallPos.position);
-
+        fireball1.GetComponent<IProjectile>().SetAttacker(attackerPos);
         yield return new WaitForSeconds(1f);
 
         var fireball2 = ObjectPoolManager.instance.GetPool("FireBall");
         fireball2.GetComponent<FireBall>().Init(targetPos, fireBallPos.position + Vector3.Scale(Vector3.one, fireBallPos.right));
+        fireball2.GetComponent<IProjectile>().SetAttacker(attackerPos);
 
         yield return new WaitForSeconds(1f);
 
         var fireball3 = ObjectPoolManager.instance.GetPool("FireBall");
         fireball3.GetComponent<FireBall>().Init(targetPos, fireBallPos.position + Vector3.Scale(Vector3.one, -fireBallPos.right));
+        fireball3.GetComponent<IProjectile>().SetAttacker(attackerPos);
+
     }
 }

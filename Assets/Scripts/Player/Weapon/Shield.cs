@@ -7,7 +7,6 @@ public class Shield : BaseWeapon
     private bool canParrying = false;
     private bool canDodge = false;
 
-    public Vector3 projectileVelocity;
     public GameObject parryingPrefab;
     public GameObject projectile;
     public override void Init(PlayerController player, PlayerAnimationHandler animationHandler)
@@ -33,14 +32,16 @@ public class Shield : BaseWeapon
             if (canParrying)
             {
                 var temp = Instantiate(parryingPrefab, transform.position, Quaternion.identity);
-                temp.GetComponent<Rigidbody>().AddForce(-projectileVelocity * 10f, ForceMode.Impulse);
+                var targetPos = projectile.GetComponent<IProjectile>().GetAttacker();
+                var dir = targetPos.position - transform.position;
+                temp.GetComponent<Rigidbody>().AddForce(dir * 10f, ForceMode.Impulse);
                 Destroy(projectile.gameObject);
                 TimeManager.instance.ParryingSlowMotion();
                 canParrying = false;
             }
             else
             {
-                Debug.Log(" 패링 실패 ");
+                Debug.Log("Failure Parrying");
             }
             animationHandler.SetTrigger("Parrying");
         }
@@ -80,10 +81,9 @@ public class Shield : BaseWeapon
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Projectile"))
+        if (other.CompareTag("EnemyProjectile"))
         {
             projectile = other.gameObject;
-            projectileVelocity = projectile.transform.GetComponent<Rigidbody>().velocity;
             canParrying = true;
         }
         else if(other.CompareTag("MonsterWeapon"))
@@ -93,7 +93,7 @@ public class Shield : BaseWeapon
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Projectile"))
+        if (other.CompareTag("EnemyProjectile"))
         {
             projectile = null;
             canParrying = false;

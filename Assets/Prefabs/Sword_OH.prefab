@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 036cfad6de018404bbaae4bb3902ba96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponStats: {fileID: 11400000, guid: 4c51aafdc64269a4eb4bd5a4265e06ef, type: 2}
   damage: 1
 --- !u!136 &-4422001024259531994
 CapsuleCollider:

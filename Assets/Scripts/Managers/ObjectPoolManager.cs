@@ -50,7 +50,13 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject GetPool(string key)
     {
-        if (pools.ContainsKey(key) && pools[key].Count > 0)
+        if (!pools.ContainsKey(key))
+        {
+            Debug.LogError("No pool exists for this key: " + key);
+            return null;
+        }
+
+        if (pools[key].Count > 0)
         {
             GameObject obj = pools[key].Dequeue();
             obj.SetActive(true);
@@ -58,7 +64,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
         else
         {
-            return null;
+            return CreateAdditionalObject(key);
         }
     }
 
@@ -73,5 +79,34 @@ public class ObjectPoolManager : MonoBehaviour
         {
             Debug.LogError("No pool exists for this key: " + key);
         }
+    }
+    private GameObject CreateAdditionalObject(string key)
+    {
+        string resourcePath = "";
+
+        switch (key)
+        {
+            case "Arrow":
+                resourcePath = "Projectiles/Arrow";
+                break;
+            case "FireBall":
+                resourcePath = "Projectiles/FireBall";
+                break;
+            case "MonsterArrow":
+                resourcePath = "Projectiles/MonsterArrow";
+                break;
+            case "HitEffect":
+                resourcePath = "Effect/HitEffect";
+                break;
+        }
+
+        GameObject prefab = Resources.Load<GameObject>(resourcePath);
+
+        GameObject obj = Instantiate(prefab);
+        obj.SetActive(true);
+        obj.transform.SetParent(transform);
+        pools[key].Enqueue(obj);
+
+        return obj;
     }
 }

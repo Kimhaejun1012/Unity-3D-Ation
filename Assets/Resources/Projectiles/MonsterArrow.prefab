@@ -9696,7 +9696,7 @@ GameObject:
   - component: {fileID: 4782029196916725903}
   m_Layer: 10
   m_Name: MonsterArrow
-  m_TagString: Projectile
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9784,6 +9784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShoot: 0
   power: 30
+  attacker: {fileID: 0}
   target: {fileID: 0}
 --- !u!1 &3988310371540118987
 GameObject:

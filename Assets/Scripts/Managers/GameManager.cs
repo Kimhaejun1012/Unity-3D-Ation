@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
+    public Transform attackMonster;
     void Awake()
     {
         if (instance == null)

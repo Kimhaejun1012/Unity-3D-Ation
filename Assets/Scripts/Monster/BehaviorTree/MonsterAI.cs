@@ -10,6 +10,8 @@ public class MonsterAI : MonoBehaviour
     Blackboard blackboard = new();
     Vector3 originPos;
 
+    [SerializeField] Collider weakPoint;
+
     [SerializeField] float rangeAttackCoolTime = 10f;
     [SerializeField] float bowAttackCastingTime = 3f;
     [SerializeField] float fireBallCastingTime = 3f;
@@ -71,7 +73,12 @@ public class MonsterAI : MonoBehaviour
         dieSequence.AddChild(new CheckDie("CheckDie", blackboard));
         dieSequence.AddChild(new DoDieAction("DoDieAction", blackboard));
 
+        SequenceNode hitWeakSequence = new("HitWeakSequence");
+        hitWeakSequence.AddChild(new CheckWeakHit("CheckWeakHit", blackboard));
+        hitWeakSequence.AddChild(new DelayNode("WeakHitDelay",2f, new DoWeakHitAction("DoWeakHitAction", blackboard)));
+
         rootNode.AddChild(dieSequence);
+        rootNode.AddChild(hitWeakSequence);
 
         SetDetectedNode(rootNode);
 
@@ -92,8 +99,9 @@ public class MonsterAI : MonoBehaviour
         blackboard.SetValue("Rigidbody", rigidbody);
         blackboard.SetValue("Rigidbody", rigidbody);
         blackboard.SetValue("ActorStats", actorStats);
-        blackboard.SetValue("WalkSpeed", 5);
+        blackboard.SetValue("WalkSpeed", 0);
         blackboard.SetValue("DashSpeed", 10);
+        blackboard.SetValue("WeakHit", false);
 
         return blackboard;
     }
@@ -148,5 +156,12 @@ public class MonsterAI : MonoBehaviour
     {
         Destroy(GetComponent<CapsuleCollider>());
         Destroy(this);
+    }
+    public void WeakHit(Collider collider)
+    {
+        if (collider == weakPoint && !blackboard.GetValue<bool>("WeakHit"))
+        {
+            blackboard.SetValue("WeakHit", true);
+        }
     }
 }

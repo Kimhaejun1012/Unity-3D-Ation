@@ -1,10 +1,12 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class FireBall : MonoBehaviour
+public class FireBall : MonoBehaviour, IProjectile
 {
     Rigidbody rb;
     Transform target;
+    Transform attacker;
     float speed = 30f;
 
     private void Start()
@@ -42,5 +44,15 @@ public class FireBall : MonoBehaviour
         {
             rb.velocity = (target.position - transform.position).normalized * speed;
         }
+    }
+
+    public void SetAttacker(Transform transform)
+    {
+        attacker = transform;
+    }
+
+    public Transform GetAttacker()
+    {
+        return attacker;
     }
 }

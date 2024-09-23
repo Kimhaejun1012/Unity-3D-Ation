@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Sword : BaseWeapon
 {
-    public int damage = 100;
 
     public override void Init(PlayerController player, PlayerAnimationHandler animationHandler)
     {
@@ -58,7 +57,7 @@ public class Sword : BaseWeapon
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
-            damageable?.TakeDamage(damage);
+            damageable?.TakeDamage(weaponStats.damage);
             var effect = ObjectPoolManager.instance.GetPool("HitEffect");
             effect.transform.position = other.ClosestPoint(transform.position);
         }

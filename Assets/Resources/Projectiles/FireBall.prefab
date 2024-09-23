@@ -4768,7 +4768,7 @@ GameObject:
   - component: {fileID: -7692327141561893198}
   m_Layer: 10
   m_Name: FireBall
-  m_TagString: Projectile
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,7 +7,8 @@ public class Arrow : MonoBehaviour
 {
     private Rigidbody rb;
     public LayerMask monsterLayer;
-    public int damage = 5;
+
+    int _damage;
 
     readonly float power = 30;
     bool isHit = false;
@@ -24,7 +25,7 @@ public class Arrow : MonoBehaviour
             transform.forward = rb.velocity.normalized;
         }
     }
-    public void Init(Vector3 pos)
+    public void Init(Vector3 pos, int damage)
     {
         Vector3 screenPosition = UIManager.instance.crossHair.transform.position;
         screenPosition.z = Camera.main.farClipPlane;
@@ -32,6 +33,7 @@ public class Arrow : MonoBehaviour
         transform.position = pos;
         transform.forward = bowForward;
         rb.AddForce(transform.forward * power, ForceMode.Impulse);
+        _damage = damage;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -39,7 +41,7 @@ public class Arrow : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Monster") && !isHit)
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-            damageable?.TakeDamage(damage);
+            damageable?.TakeDamage(_damage);
             var effect = ObjectPoolManager.instance.GetPool("HitEffect");
             effect.transform.position = collision.contacts[0].point;
         }
@@ -51,7 +53,8 @@ public class Arrow : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") && !isHit)
         {
             IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
-            damageable?.TakeDamage(damage);
+            damageable?.TakeDamage(_damage);
+            other.GetComponent<MonsterAI>().WeakHit(other);
             var effect = ObjectPoolManager.instance.GetPool("HitEffect");
             effect.transform.position = other.ClosestPoint(transform.position);
             isHit = true;
