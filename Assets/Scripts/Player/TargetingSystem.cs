@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class TargetingSystem : MonoBehaviour
 {
+    public delegate void TargetChanged(Transform newTarget);
+    public static event TargetChanged OnTargeting;
+
     public float detectionRadius = 20f;
     public float fieldOfViewAngle = 150f;
     public float viewDistance = 10f;
@@ -25,13 +28,15 @@ public class TargetingSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             currentTarget = FindClosestTargetInView();
+            OnTargeting?.Invoke(currentTarget);
         }
         else if (Input.GetKeyUp(KeyCode.F))
         {
             if (currentTarget != null)
             {
-                playerController.SetStateIdle();
+                playerController.TargetingBool();
                 currentTarget = null;
+                OnTargeting?.Invoke(currentTarget);
             }
         }
         if (currentTarget != null)
@@ -40,7 +45,6 @@ public class TargetingSystem : MonoBehaviour
             targetObj.SetActive(true);
             Vector3 headPosition = currentTarget.position + new Vector3(0, 4, 0);
             targetObj.transform.position = headPosition;
-            Debug.Log("ÇöÀç Å¸°Ù = " + currentTarget.name);
         }
         else
         {
@@ -83,7 +87,7 @@ public class TargetingSystem : MonoBehaviour
 
         if(closestTarget != null)
         {
-            playerController.ChangeState(PlayerState.Aim);
+            playerController.TargetingBool();
         }
 
         return closestTarget;

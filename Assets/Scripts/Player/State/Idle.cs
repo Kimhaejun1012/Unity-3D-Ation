@@ -21,7 +21,7 @@ public class Idle : State
 
         if (dir != Vector3.zero)
         {
-            if (Input.GetButton("Run"))
+            if (Input.GetButton("Run") && !animationHandler.GetBool("Targeting"))
             {
                 player.ChangeState(PlayerState.Run);
             }
@@ -34,9 +34,13 @@ public class Idle : State
         {
             player.PlayerJump();
         }
-        if (Input.GetButtonDown("Crouch"))
+        if (!animationHandler.GetBool("Targeting"))
         {
-            player.ChangeState(PlayerState.Crouch);
+            if (Input.GetButtonDown("Crouch"))
+            {
+                player.ChangeState(PlayerState.Crouch);
+            }
         }
+
     }
 }

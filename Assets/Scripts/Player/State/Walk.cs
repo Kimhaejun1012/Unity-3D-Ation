@@ -24,7 +24,7 @@ public class Walk : State
     {
         animationHandler.SetBool("Walk", false);
     }
-    public override void Update()
+    public void StandardWalk()
     {
         dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
@@ -48,22 +48,54 @@ public class Walk : State
 
             player.transform.rotation = Quaternion.Slerp(player.transform.rotation, Quaternion.LookRotation(rotate), Time.deltaTime * player.rotSpeed);
         }
+    }
+    public void StrafeWalk()
+    {
+        dir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        Vector3 moveH = Vector3.Scale(player.transform.right, new Vector3(1, 0, 1)) * dir.x;
+        Vector3 moveV = Vector3.Scale(player.transform.forward, new Vector3(1, 0, 1)) * dir.z;
+
+        moveVec = (moveH + moveV).normalized;
+        float timeScale = 1f / Time.timeScale;
+        player.rb.velocity = moveVec * applySpeed * timeScale;
+
+        smoothHorizontal = Mathf.Lerp(smoothHorizontal, dir.x, 10f * Time.deltaTime);
+        smoothVertical = Mathf.Lerp(smoothVertical, dir.z, 10f * Time.deltaTime);
+        animationHandler.SetFloat("BlendX", smoothHorizontal);
+        animationHandler.SetFloat("BlendY", smoothVertical);
+    }
+    public override void Update()
+    {
+        if (!animationHandler.GetBool("Targeting"))
+        {
+            StandardWalk();
+        }
+        else
+        {
+            StrafeWalk();
+        }
 
         if (dir == Vector3.zero)
         {
             player.ChangeState(PlayerState.Idle);
         }
-        if (Input.GetButtonDown("Run"))
+
+        if (!animationHandler.GetBool("Targeting"))
         {
-            player.ChangeState(PlayerState.Run);
+            if (Input.GetButtonDown("Run"))
+            {
+                player.ChangeState(PlayerState.Run);
+            }
+
+            if (Input.GetButtonDown("Crouch"))
+            {
+                player.ChangeState(PlayerState.Crouch);
+            }
         }
         if (Input.GetButtonDown("Jump"))
         {
             player.PlayerJump();
-        }
-        if (Input.GetButtonDown("Crouch"))
-        {
-            player.ChangeState(PlayerState.Crouch);
         }
     }
 }

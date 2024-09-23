@@ -95,6 +95,10 @@ public class PlayerController : MonoBehaviour
 
         ChangeState(PlayerState.Air);
     }
+    public void TargetingBool()
+    {
+        animationrHandler.SetBool("Targeting", !animationrHandler.GetBool("Targeting"));
+    }
     public void SetStateAir()
     {
         ChangeState(PlayerState.Air);

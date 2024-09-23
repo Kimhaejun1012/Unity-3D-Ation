@@ -7,6 +7,10 @@ public class CameraController : MonoBehaviour
     public Transform followObj;
     public Transform target;
 
+    Transform lookTarget;
+    Quaternion currentRotate;
+
+
     public float followSpeed = 10f;
     public float sensitivity = 300f;
     public float clampAngle = 40f;
@@ -19,7 +23,15 @@ public class CameraController : MonoBehaviour
     public Vector3 finalDir;
 
     public float smoothness = 10f;
+    private void OnEnable()
+    {
+        TargetingSystem.OnTargeting += HandleTargetChange;
+    }
 
+    private void OnDisable()
+    {
+        TargetingSystem.OnTargeting -= HandleTargetChange;
+    }
     void Start()
     {
         rotX = transform.localRotation.eulerAngles.x;
@@ -29,13 +41,38 @@ public class CameraController : MonoBehaviour
     }
     void LateUpdate()
     {
+        if(lookTarget == null)
+        {
+            TargetingOff();
+        }
+        else
+        {
+            TargetingOn();
+        }
+    }
+    void HandleTargetChange(Transform target)
+    {
+        lookTarget = target;
+    }
+    void TargetingOn()
+    {
+        currentRotate = Quaternion.LookRotation(lookTarget.position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, currentRotate, smoothness * Time.deltaTime);
+        transform.position = followObj.position;
+
+        Vector3 angles = currentRotate.eulerAngles;
+        rotX = angles.x;
+        rotY = angles.y;
+    }
+    void TargetingOff()
+    {
         rotX -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
         rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
-        Quaternion rot = Quaternion.Euler(rotX, rotY, 0f);
+        currentRotate = Quaternion.Euler(rotX, rotY, 0f);
 
-        transform.rotation = rot;
+        transform.rotation = currentRotate;
         transform.position = followObj.position;
     }
 }
