@@ -15,9 +15,12 @@ public class CheckEnemyWithinMeleeAttackRange : Node
     }
     public override NodeState Evaluate()
     {
-        if (MonsterManager.instance.transform_P != null)
+        var transform = _blackboard.GetValue<Transform>("Transform");
+        var target = _blackboard.GetValue<Transform>("Target");
+
+        if (target != null)
         {
-            if (Vector3.SqrMagnitude(MonsterManager.instance.transform_P.position - MonsterManager.instance.transform_M.position) < (2 * 2))
+            if (Vector3.SqrMagnitude(transform.position - target.position) < (2 * 2))
             {
                 return NodeState.Success;
             }

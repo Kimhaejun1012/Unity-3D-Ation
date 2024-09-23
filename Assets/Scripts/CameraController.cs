@@ -56,7 +56,9 @@ public class CameraController : MonoBehaviour
     }
     void TargetingOn()
     {
-        currentRotate = Quaternion.LookRotation(lookTarget.position - transform.position);
+        Vector3 adjustedPosition = new Vector3(lookTarget.position.x, lookTarget.position.y + 1, lookTarget.position.z);
+
+        currentRotate = Quaternion.LookRotation(adjustedPosition - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, currentRotate, smoothness * Time.deltaTime);
         transform.position = followObj.position;
 

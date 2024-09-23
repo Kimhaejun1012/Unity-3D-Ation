@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Dodge : State
 {
-    float upPower = 4f;
-    float backPower = 2f;
+    float upPower = 2f;
+    float backPower = 1f;
     public Dodge(PlayerController player, PlayerAnimationHandler animationHandler) : base(player, animationHandler)
     {
     }
@@ -14,7 +14,7 @@ public class Dodge : State
         animationHandler.SetTrigger("Dodge");
         Vector3 backRoll = -player.transform.forward * backPower + Vector3.up * upPower;
         backRoll.Normalize();
-        player.rb.AddForce(backRoll * 10f, ForceMode.Impulse);
+        player.rb.AddForce(backRoll * 6f, ForceMode.Impulse);
     }
 
     public override void Exit()
@@ -23,5 +23,13 @@ public class Dodge : State
 
     public override void Update()
     {
+        if (player.rb.velocity.y < 0)
+        {
+            if (Physics.Raycast(player.transform.position + Vector3.up * 0.2f, Vector3.down, 0.2f, player.groundLayer))
+            {
+                animationHandler.SetTrigger("Landing");
+                player.SetStateIdle();
+            }
+        }
     }
 }

@@ -24,7 +24,7 @@ public class MoveToOriginPosition : Node
     {
         var transform = _blackboard.GetValue<Transform>("Transform");
 
-        if (Vector3.SqrMagnitude(_originPos - MonsterManager.instance.transform_M.position) < float.Epsilon * float.Epsilon)
+        if (Vector3.SqrMagnitude(_originPos - transform.position) < float.Epsilon * float.Epsilon)
         {
             animator.SetBool("Walk", false);
             return NodeState.Success;

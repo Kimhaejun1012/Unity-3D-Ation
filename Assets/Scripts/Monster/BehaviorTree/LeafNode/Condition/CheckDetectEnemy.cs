@@ -16,14 +16,14 @@ public class CheckDetectEnemy : Node
 
     public override NodeState Evaluate()
     {
-        var overlapColliders = Physics.OverlapSphere(MonsterManager.instance.transform_M.position, 10f, LayerMask.GetMask("Player"));
+        //var overlapColliders = Physics.OverlapSphere(MonsterManager.instance.transform_M.position, 10f, LayerMask.GetMask("Player"));
 
-        if (overlapColliders != null && overlapColliders.Length > 0)
-        {
-            MonsterManager.instance.transform_P = overlapColliders[0].transform;
+        //if (overlapColliders != null && overlapColliders.Length > 0)
+        //{
+        //    MonsterManager.instance.transform_P = overlapColliders[0].transform;
 
-            return NodeState.Success;
-        }
+        //    return NodeState.Success;
+        //}
 
 
         return NodeState.Failure;

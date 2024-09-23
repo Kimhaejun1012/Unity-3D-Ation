@@ -8,6 +8,7 @@ public class TimeManager : MonoBehaviour
     public Animator animator;
 
     float slowFactor = 0.3f;
+    float dodgeSlowFactor = 0.1f;
     float slowMotionDuration = 0.5f;
     float transitionDuration = 1f;
     void Awake()
@@ -25,6 +26,12 @@ public class TimeManager : MonoBehaviour
     public void ApplySlowMotion()
     {
         Time.timeScale = slowFactor;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        AdjustAnimationSpeed();
+    }
+    public void ApplyDodgeSlowMotion()
+    {
+        Time.timeScale = dodgeSlowFactor;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         AdjustAnimationSpeed();
     }
