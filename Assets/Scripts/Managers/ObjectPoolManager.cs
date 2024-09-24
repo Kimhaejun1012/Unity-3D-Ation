@@ -28,7 +28,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         CreatePool("Arrow", "Projectiles/Arrow", poolSize);
         CreatePool("FireBall", "Projectiles/FireBall", poolSize);
-        CreatePool("MonsterArrow", "Projectiles/MonsterArrow", poolSize);
+        CreatePool("BlackHole", "Projectiles/BlackHole", poolSize);
 
         CreatePool("HitEffect", "Effect/HitEffect", poolSize);
     }
@@ -92,8 +92,8 @@ public class ObjectPoolManager : MonoBehaviour
             case "FireBall":
                 resourcePath = "Projectiles/FireBall";
                 break;
-            case "MonsterArrow":
-                resourcePath = "Projectiles/MonsterArrow";
+            case "BlackHole":
+                resourcePath = "Projectiles/BlackHole";
                 break;
             case "HitEffect":
                 resourcePath = "Effect/HitEffect";

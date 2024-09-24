@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterArrow : MonoBehaviour, IProjectile
+public class BlackHole : MonoBehaviour, IProjectile
 {
     public bool isShoot = false;
+    [SerializeField] float finalSize = 1;
     public float power = 30f;
     Rigidbody rb;
 
@@ -38,7 +39,7 @@ public class MonsterArrow : MonoBehaviour, IProjectile
         float duration = 2.0f;
         float elapsed = 0;
         Vector3 initialScale = transform.localScale;
-        Vector3 targetScale = new Vector3(5, 5, 5);
+        Vector3 targetScale = new Vector3(finalSize, finalSize, finalSize);
 
         while (elapsed < duration)
         {

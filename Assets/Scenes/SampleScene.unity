@@ -2822,7 +2822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 743174048}
   m_Layer: 8
-  m_Name: ArrowPos
+  m_Name: BlackHolePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2837,7 +2837,7 @@ Transform:
   m_GameObject: {fileID: 743174047}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.142, y: 1.644, z: 0.196}
+  m_LocalPosition: {x: 0, y: 1.644, z: 2.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16363,7 +16363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weakPoint: {fileID: 5268267032977711367}
-  rangeAttackCoolTime: 30
+  rangeAttackCoolTime: 1
   bowAttackCastingTime: 3
   fireBallCastingTime: 3
   meleeAttackCoolTime: 50

@@ -118,4 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2db6a5a16babf9e4b98c1b5343d0a09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parryingPrefab: {fileID: 5114571372474800189, guid: bc2dc3f7f3c089149b74657d3c7130a2, type: 3}
+  weaponStats: {fileID: 0}
+  parryingPrefab: {fileID: 6411854366706722683, guid: ae7e594b8816e02478a9628256196d7b, type: 3}
+  projectile: {fileID: 0}

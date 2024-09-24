@@ -30,10 +30,10 @@ public class SkillHandler : MonoBehaviour
     }
     public void DoArrowAttack()
     {
-        curArrow = ObjectPoolManager.instance.GetPool("MonsterArrow");
-        curArrow.GetComponent<MonsterArrow>().Init(targetPos, arrowPos.position);
+        curArrow = ObjectPoolManager.instance.GetPool("BlackHole");
+        curArrow.GetComponent<BlackHole>().Init(targetPos, arrowPos.position);
         curArrow.GetComponent<IProjectile>().SetAttacker(attackerPos);
-        attackAction = curArrow.GetComponent<MonsterArrow>().Shot;
+        attackAction = curArrow.GetComponent<BlackHole>().Shot;
     }
     public void ArrowShot()
     {
