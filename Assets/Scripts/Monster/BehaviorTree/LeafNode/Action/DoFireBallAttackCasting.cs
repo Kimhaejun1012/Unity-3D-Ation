@@ -16,11 +16,20 @@ public class DoFireBallAttackCasting : Node
 
     public override NodeState Evaluate()
     {
-        animator.SetTrigger("FireBallCasting");
         if (animator.GetBool("Attacking"))
         {
-            animator.ResetTrigger("FireBallCasting");
+            //animator.ResetTrigger("FireBallCasting");
+        }
+        else
+        {
+            var skillHandler = _blackboard.GetValue<SkillHandler>("SkillHandler");
+            var fireballCastingTime = _blackboard.GetValue<float>("FireBallCastingTime");
+            skillHandler.DoFireballSkill(fireballCastingTime);
+            animator.SetBool("Attacking", true);
+            animator.SetTrigger("FireBallCasting");
         }
         return NodeState.Success;
+
     }
+
 }

@@ -17,6 +17,8 @@ public class DoFireBallAttack : Node
 
     public override NodeState Evaluate()
     {
+        //var skillHandler = _blackboard.GetValue<SkillHandler>("SkillHandler");
+        //skillHandler.DoFireballSkill
         animator.SetTrigger("FireBall");
         return NodeState.Success;
     }

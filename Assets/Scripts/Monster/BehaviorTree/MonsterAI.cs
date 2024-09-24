@@ -13,7 +13,7 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] Collider weakPoint;
 
     [SerializeField] float rangeAttackCoolTime = 10f;
-    [SerializeField] float bowAttackCastingTime = 3f;
+    [SerializeField] float blackHoleCastingTime = 3f;
     [SerializeField] float fireBallCastingTime = 3f;
     [SerializeField] float meleeAttackCoolTime = 5f;
 
@@ -75,7 +75,7 @@ public class MonsterAI : MonoBehaviour
 
         SequenceNode hitWeakSequence = new("HitWeakSequence");
         hitWeakSequence.AddChild(new CheckWeakHit("CheckWeakHit", blackboard));
-        hitWeakSequence.AddChild(new DelayNode("WeakHitDelay",2f, new DoWeakHitAction("DoWeakHitAction", blackboard)));
+        hitWeakSequence.AddChild(new DelayNode("WeakHitDelay", 4f, new DoWeakHitAction("DoWeakHitAction", blackboard)));
 
         rootNode.AddChild(dieSequence);
         rootNode.AddChild(hitWeakSequence);
@@ -93,14 +93,19 @@ public class MonsterAI : MonoBehaviour
         var transform = GetComponent<Transform>();
         var rigidbody = GetComponent<Rigidbody>();
         var actorStats = GetComponent<ActorStats>();
+        var skillHandler = GetComponent<SkillHandler>();
 
         blackboard.SetValue("Animator", animator);
         blackboard.SetValue("Transform", transform);
         blackboard.SetValue("Rigidbody", rigidbody);
         blackboard.SetValue("Rigidbody", rigidbody);
         blackboard.SetValue("ActorStats", actorStats);
+        blackboard.SetValue("SkillHandler", skillHandler);
+
         blackboard.SetValue("WalkSpeed", 0);
         blackboard.SetValue("DashSpeed", 10);
+        blackboard.SetValue("BlackHoleCastingTime", blackHoleCastingTime);
+        blackboard.SetValue("FireBallCastingTime", fireBallCastingTime);
         blackboard.SetValue("WeakHit", false);
 
         return blackboard;
@@ -119,7 +124,7 @@ public class MonsterAI : MonoBehaviour
 
         SequenceNode bowAttackSequence = new("BowAttackSequence");
         bowAttackSequence.AddChild(new DoBowAttackCasting("WaitBowAttack", blackboard));
-        bowAttackSequence.AddChild(new DelayNode("BowDelay", bowAttackCastingTime, new DoBowAttack("BowAttack", blackboard)));
+        bowAttackSequence.AddChild(new DelayNode("BowDelay", blackHoleCastingTime, new DoBowAttack("BowAttack", blackboard)));
 
         SequenceNode dashAttackSequence = new("DashAttackSequence");
         dashAttackSequence.AddChild(new DoRushTarget("DoRushTarget", blackboard));

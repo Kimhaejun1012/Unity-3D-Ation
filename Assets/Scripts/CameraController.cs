@@ -23,6 +23,16 @@ public class CameraController : MonoBehaviour
     public Vector3 finalDir;
 
     public float smoothness = 10f;
+
+    private Camera cam;
+
+    Coroutine zoomIn;
+    Coroutine zoomOut;
+
+    private float zoomSpeed = 10;
+    private float maxZoom = 30;
+    private float defaultZoom;
+
     private void OnEnable()
     {
         TargetingSystem.OnTargeting += HandleTargetChange;
@@ -32,12 +42,17 @@ public class CameraController : MonoBehaviour
     {
         TargetingSystem.OnTargeting -= HandleTargetChange;
     }
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
     void Start()
     {
         rotX = transform.localRotation.eulerAngles.x;
         rotY = transform.localRotation.eulerAngles.y;
 
         dirNormalized = realCamera.localPosition.normalized;
+        defaultZoom = cam.fieldOfView;
     }
     void LateUpdate()
     {
@@ -76,5 +91,39 @@ public class CameraController : MonoBehaviour
 
         transform.rotation = currentRotate;
         transform.position = followObj.position;
+    }
+    public void StartZoom()
+    {
+        if (zoomOut != null)
+        {
+            StopCoroutine(zoomOut);
+            zoomOut = null;
+        }
+        zoomIn = StartCoroutine(ZoomIn());
+    }
+    public void FinishZoom()
+    {
+        if (zoomIn != null)
+        {
+            StopCoroutine(zoomIn);
+            zoomIn = null;
+        }
+        zoomOut = StartCoroutine(ZoomOut());
+    }
+    private IEnumerator ZoomIn()
+    {
+        while (cam.fieldOfView >= maxZoom)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, maxZoom, Time.deltaTime * zoomSpeed);
+            yield return null;
+        }
+    }
+    private IEnumerator ZoomOut()
+    {
+        while (cam.fieldOfView < defaultZoom)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, defaultZoom, Time.deltaTime * zoomSpeed);
+            yield return null;
+        }
     }
 }

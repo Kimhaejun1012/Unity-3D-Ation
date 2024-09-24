@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8878562286611100041}
   - component: {fileID: 3087088407628001141}
   - component: {fileID: -8840294575025146591}
+  - component: {fileID: 2510545329393567041}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -102,7 +103,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.6393173, y: 3.9534576, z: 1.2934664}
   m_Center: {x: -0.073619194, y: 1.7358329, z: -0.029911134}
@@ -121,3 +122,26 @@ MonoBehaviour:
   weaponStats: {fileID: 0}
   parryingPrefab: {fileID: 6411854366706722683, guid: ae7e594b8816e02478a9628256196d7b, type: 3}
   projectile: {fileID: 0}
+  triggerCollider: {fileID: 3087088407628001141}
+  nonTriggerCollider: {fileID: 2510545329393567041}
+--- !u!65 &2510545329393567041
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657402259589451117}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.58306307, y: 0.38, z: 0.58306307}
+  m_Center: {x: 0.000000022947436, y: 0.2, z: -0.000000016221254}

@@ -40,7 +40,14 @@ public class PlayerAnimationHandler : MonoBehaviour
                 return normalizedTime != 0 && normalizedTime < 1f;
             }
         }
-
         return false;
+    }
+    public void StartZoom()
+    {
+        GameManager.instance.CamZoomStart();
+    }
+    public void FinishZoom()
+    {
+        GameManager.instance.CamZoomFinish();
     }
 }

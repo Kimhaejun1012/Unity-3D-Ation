@@ -16,10 +16,17 @@ public class DoBowAttackCasting : Node
 
     public override NodeState Evaluate()
     {
-        animator.SetTrigger("BowAttackCasting");
         if (animator.GetBool("Attacking"))
         {
             animator.ResetTrigger("BowAttackCasting");
+        }
+        else
+        {
+            var skillHandler = _blackboard.GetValue<SkillHandler>("SkillHandler");
+            var castingTime = _blackboard.GetValue<float>("BlackHoleCastingTime");
+            skillHandler.DoBlackHoleAttack(castingTime);
+            animator.SetBool("Attacking", true);
+            animator.SetTrigger("BowAttackCasting");
         }
         return NodeState.Success;
     }

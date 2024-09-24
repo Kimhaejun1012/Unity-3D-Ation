@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Sword : BaseWeapon
 {
-
+    Collider _collider;
+    private void Start()
+    {
+        _collider = GetComponent<Collider>();
+    }
     public override void Init(PlayerController player, PlayerAnimationHandler animationHandler)
     {
         this.player = player;
@@ -60,6 +64,7 @@ public class Sword : BaseWeapon
             damageable?.TakeDamage(weaponStats.damage);
             var effect = ObjectPoolManager.instance.GetPool("HitEffect");
             effect.transform.position = other.ClosestPoint(transform.position);
+            _collider.enabled = false;
         }
     }
 }

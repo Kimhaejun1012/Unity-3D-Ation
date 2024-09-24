@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour
         states.Add(new DodgeAttack(this, animationrHandler));
         SetStateIdle();
     }
-
     void Update()
     {
         currentState?.Update();

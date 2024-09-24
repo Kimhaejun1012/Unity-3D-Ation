@@ -47,6 +47,7 @@ public class Bow : BaseWeapon
     }
     private void HandleMouseUp()
     {
+
         switch (player.state)
         {
             case PlayerState.Idle:

@@ -20,18 +20,18 @@ public class SkillHandler : MonoBehaviour
     {
     }
 
-    public void DoFireballSkill()
+    public void DoFireballSkill(float castingTime)
     {
         //if (coroutine != null)
         //{
         //    return;
         //}
-        coroutine = StartCoroutine(DoFireBallRoutine());
+        coroutine = StartCoroutine(DoFireBallRoutine(castingTime));
     }
-    public void DoArrowAttack()
+    public void DoBlackHoleAttack(float castingTime)
     {
         curArrow = ObjectPoolManager.instance.GetPool("BlackHole");
-        curArrow.GetComponent<BlackHole>().Init(targetPos, arrowPos.position);
+        curArrow.GetComponent<BlackHole>().Init(targetPos, arrowPos.position, castingTime);
         curArrow.GetComponent<IProjectile>().SetAttacker(attackerPos);
         attackAction = curArrow.GetComponent<BlackHole>().Shot;
     }
@@ -40,22 +40,21 @@ public class SkillHandler : MonoBehaviour
         attackAction.Invoke();
         curArrow = null;
     }
-    private IEnumerator DoFireBallRoutine()
+    private IEnumerator DoFireBallRoutine(float castingTime)
     {
         var fireball1 = ObjectPoolManager.instance.GetPool("FireBall");
-        fireball1.GetComponent<FireBall>().Init(targetPos, fireBallPos.position);
+        fireball1.GetComponent<FireBall>().Init(targetPos, fireBallPos.position, castingTime);
         fireball1.GetComponent<IProjectile>().SetAttacker(attackerPos);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(castingTime / 4);
 
         var fireball2 = ObjectPoolManager.instance.GetPool("FireBall");
-        fireball2.GetComponent<FireBall>().Init(targetPos, fireBallPos.position + Vector3.Scale(Vector3.one, fireBallPos.right));
+        fireball2.GetComponent<FireBall>().Init(targetPos, fireBallPos.position + Vector3.Scale(Vector3.one, fireBallPos.right), castingTime);
         fireball2.GetComponent<IProjectile>().SetAttacker(attackerPos);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(castingTime / 4);
 
         var fireball3 = ObjectPoolManager.instance.GetPool("FireBall");
-        fireball3.GetComponent<FireBall>().Init(targetPos, fireBallPos.position + Vector3.Scale(Vector3.one, -fireBallPos.right));
+        fireball3.GetComponent<FireBall>().Init(targetPos, fireBallPos.position + Vector3.Scale(Vector3.one, -fireBallPos.right), castingTime);
         fireball3.GetComponent<IProjectile>().SetAttacker(attackerPos);
-
     }
 }

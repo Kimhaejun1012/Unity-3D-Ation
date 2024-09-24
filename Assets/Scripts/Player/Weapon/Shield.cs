@@ -9,6 +9,9 @@ public class Shield : BaseWeapon
 
     public GameObject parryingPrefab;
     public GameObject projectile;
+
+    [SerializeField] Collider triggerCollider;
+    [SerializeField] Collider nonTriggerCollider;
     public override void Init(PlayerController player, PlayerAnimationHandler animationHandler)
     {
         this.player = player;
@@ -58,6 +61,9 @@ public class Shield : BaseWeapon
     }
     private void HandleMouseDown()
     {
+        triggerCollider.enabled = true;
+        nonTriggerCollider.enabled = true;
+
         switch (player.state)
         {
             case PlayerState.Idle:
@@ -72,6 +78,8 @@ public class Shield : BaseWeapon
     }
     private void HandleMouseUp()
     {
+        triggerCollider.enabled = false;
+        nonTriggerCollider.enabled = false;
         switch (player.state)
         {
             case PlayerState.OnShield:

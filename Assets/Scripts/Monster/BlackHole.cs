@@ -11,15 +11,24 @@ public class BlackHole : MonoBehaviour, IProjectile
 
     public Transform attacker;
     public Transform target;
+    Vector3 originScale;
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        StartCoroutine(SetScale());
+        originScale = transform.localScale;
     }
-    public void Init(Transform target, Vector3 pos)
+    private void OnEnable()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+    private void OnDisable()
+    {
+        transform.localScale = originScale;
+    }
+    public void Init(Transform target, Vector3 pos, float duration)
     {
         this.target = target;
         transform.position = pos;
+        StartCoroutine(SetScale(duration));
     }
 
     void Update()
@@ -34,17 +43,15 @@ public class BlackHole : MonoBehaviour, IProjectile
         isShoot = true;
         rb.AddForce(transform.forward * power, ForceMode.Impulse);
     }
-    IEnumerator SetScale()
+    IEnumerator SetScale(float duration)
     {
-        float duration = 2.0f;
         float elapsed = 0;
-        Vector3 initialScale = transform.localScale;
         Vector3 targetScale = new Vector3(finalSize, finalSize, finalSize);
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-            transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsed / duration);
+            transform.localScale = Vector3.Lerp(originScale, targetScale, elapsed / duration);
             yield return null;
         }
         transform.localScale = targetScale;

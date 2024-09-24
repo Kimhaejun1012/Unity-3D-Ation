@@ -9,37 +9,53 @@ public class FireBall : MonoBehaviour, IProjectile
     Transform attacker;
     float speed = 30f;
 
+    Vector3 originScale;
+
     private void Start()
     {
+        originScale = transform.localScale;
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(Scale());
-        StartCoroutine(Shoot());
+    }
+    private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
+    {
+        transform.localScale = originScale;
     }
 
-    public void Init(Transform target, Vector3 pos)
+    public void Init(Transform target, Vector3 pos, float duration)
     {
         this.target = target;
         transform.position = pos;
+        StartCoroutine(Scale(duration));
+        StartCoroutine(Shot(duration));
     }
 
-    private IEnumerator Scale()
+    private IEnumerator Scale(float duration)
     {
         Vector3 originalScale = transform.localScale;
         Vector3 targetScale = Vector3.one * 0.3f;
-        float timer = 0;
 
-        while (timer <= 2)
+        float _duration = duration / 4;
+        float elapsed = 0;
+        while (elapsed <= _duration)
         {
-            transform.localScale = Vector3.Lerp(originalScale, targetScale, timer);
-            timer += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsed / _duration);
+            elapsed += Time.deltaTime;
             yield return null;
         }
         transform.localScale = targetScale;
     }
-    private IEnumerator Shoot()
+    private IEnumerator Shot(float duration)
     {
-        yield return new WaitForSeconds(3.3f);
-
+        duration += 0.7f;
+        yield return new WaitForSeconds(duration);
+        Shoot();
+    }
+    public void Shoot()
+    {
         if (target != null)
         {
             rb.velocity = (target.position - transform.position).normalized * speed;
