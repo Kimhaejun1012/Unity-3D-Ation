@@ -28,4 +28,16 @@ public class MonsterWeapon : MonoBehaviour
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
         }
     }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Vector3 hitDirection = collision.contacts[0].normal;
+
+            hitDirection = -hitDirection.normalized;
+
+            collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection);
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+        }
+    }
 }

@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     Transform lookTarget;
     Quaternion currentRotate;
 
-
     public float followSpeed = 10f;
     public float sensitivity = 300f;
     public float clampAngle = 40f;
@@ -23,6 +22,7 @@ public class CameraController : MonoBehaviour
     public Vector3 finalDir;
 
     public float smoothness = 10f;
+    bool smoothnessFinish = false;
 
     private Camera cam;
 
@@ -68,14 +68,20 @@ public class CameraController : MonoBehaviour
     void HandleTargetChange(Transform target)
     {
         lookTarget = target;
+        if(target != null)
+        {
+            StartCoroutine(SmoothRotate());
+        }
     }
     void TargetingOn()
     {
         Vector3 adjustedPosition = new Vector3(lookTarget.position.x, lookTarget.position.y + 1, lookTarget.position.z);
 
         currentRotate = Quaternion.LookRotation(adjustedPosition - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, currentRotate, smoothness * Time.deltaTime);
         transform.position = followObj.position;
+        //transform.rotation = Quaternion.Slerp(transform.rotation, currentRotate, smoothness * Time.deltaTime);
+        if(smoothnessFinish)
+        transform.LookAt(adjustedPosition);
 
         Vector3 angles = currentRotate.eulerAngles;
         rotX = angles.x;
@@ -89,8 +95,8 @@ public class CameraController : MonoBehaviour
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
         currentRotate = Quaternion.Euler(rotX, rotY, 0f);
 
-        transform.rotation = currentRotate;
         transform.position = followObj.position;
+        transform.rotation = currentRotate;
     }
     public void StartZoom()
     {
@@ -123,6 +129,26 @@ public class CameraController : MonoBehaviour
         while (cam.fieldOfView < defaultZoom)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, defaultZoom, Time.deltaTime * zoomSpeed);
+            yield return null;
+        }
+    }
+    private IEnumerator SmoothRotate()
+    {
+        smoothnessFinish = false;
+        while (true)
+        {
+            Vector3 adjustedPosition = new Vector3(lookTarget.position.x, lookTarget.position.y + 1, lookTarget.position.z);
+            Quaternion targetRotate = Quaternion.LookRotation(adjustedPosition - transform.position);
+
+            transform.position = followObj.position;
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotate, smoothness * Time.deltaTime);
+
+            if (Quaternion.Angle(transform.rotation, targetRotate) < 1f)
+            {
+                smoothnessFinish = true;
+                break;
+            }
+
             yield return null;
         }
     }

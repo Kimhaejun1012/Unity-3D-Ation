@@ -12,6 +12,7 @@ public class KnockBack : State
 
     public override void Enter()
     {
+        player.isKnockBack = true;
         Vector3 forceDir = new Vector3(player.hitDir.x, 0.5f, player.hitDir.z);
         player.rb.AddForce(forceDir * 5f, ForceMode.Impulse);
         animationHandler.SetTrigger("Hit");
@@ -19,6 +20,7 @@ public class KnockBack : State
 
     public override void Exit()
     {
+        player.isKnockBack = false;
         curDownTime = 0;
     }
 

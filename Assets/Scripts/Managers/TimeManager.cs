@@ -23,6 +23,19 @@ public class TimeManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftBracket))
+        {
+            Time.timeScale = 0.3f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightBracket))
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
     public void ApplySlowMotion()
     {
         Time.timeScale = slowFactor;
@@ -35,6 +48,7 @@ public class TimeManager : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         AdjustAnimationSpeed();
     }
+
     void AdjustAnimationSpeed()
     {
         animator.speed = 1 / Time.timeScale;

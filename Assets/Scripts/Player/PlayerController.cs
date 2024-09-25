@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] bool onGUI;
 
+    public bool isKnockBack;
     public LayerMask groundLayer;
     List<State> states = new();
     public Vector3 hitDir;
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnGUI()
     {
-        if(onGUI)
+        if (onGUI)
         {
             GUIStyle guiStyle = new GUIStyle();
             guiStyle.fontSize = 16;
@@ -113,6 +114,7 @@ public class PlayerController : MonoBehaviour
     public void Hit(Vector3 dir)
     {
         hitDir = dir;
-        ChangeState(PlayerState.KnockBack);
+        if (!isKnockBack)
+            ChangeState(PlayerState.KnockBack);
     }
 }

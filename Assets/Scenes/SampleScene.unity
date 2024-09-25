@@ -11616,6 +11616,7 @@ GameObject:
   - component: {fileID: 7592330708657374345}
   - component: {fileID: 3496383137797802585}
   - component: {fileID: 7592330708657374346}
+  - component: {fileID: 7592330708657374347}
   m_Layer: 8
   m_Name: TestMonster1
   m_TagString: Monster
@@ -13384,6 +13385,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   state: 0
   onGUI: 1
+  isKnockBack: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -13933,6 +13935,7 @@ GameObject:
   - component: {fileID: 5080030918557254638}
   - component: {fileID: 5080030918557254639}
   - component: {fileID: 5080030918557254640}
+  - component: {fileID: 5080030918557254641}
   m_Layer: 11
   m_Name: Sword_DH
   m_TagString: MonsterWeapon
@@ -14070,6 +14073,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4cf00e4b01d044a86cd0fc2391fe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &5080030918557254641
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056817638644561496}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5087712454148647357
 GameObject:
   m_ObjectHideFlags: 0
@@ -16587,7 +16617,7 @@ MonoBehaviour:
   rangeAttackCoolTime: 33
   blackHoleCastingTime: 33
   fireBallCastingTime: 111
-  meleeAttackCoolTime: 33
+  meleeAttackCoolTime: 1
   onGUI: 0
 --- !u!114 &5268267032977711362
 MonoBehaviour:
@@ -19239,6 +19269,33 @@ MonoBehaviour:
   rallyPoint1: {fileID: 836110044}
   rallyPoint2: {fileID: 1644315680}
   speed: 5
+--- !u!54 &7592330708657374347
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2916117263185340691}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7622125825369173372
 GameObject:
   m_ObjectHideFlags: 0

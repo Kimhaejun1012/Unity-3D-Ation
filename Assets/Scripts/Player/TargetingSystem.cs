@@ -41,7 +41,11 @@ public class TargetingSystem : MonoBehaviour
         }
         if (currentTarget != null)
         {
-            player.LookAt(currentTarget);
+            //player.LookAt(currentTarget);
+            float cameraY = Camera.main.transform.eulerAngles.y;
+
+            Quaternion targetRotationY = Quaternion.Euler(0f, cameraY, 0f);
+            player.transform.rotation = targetRotationY;
             targetObj.SetActive(true);
             Vector3 headPosition = currentTarget.position + new Vector3(0, 4, 0);
             targetObj.transform.position = headPosition;

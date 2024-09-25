@@ -34,6 +34,7 @@ public class Arrow : MonoBehaviour
         Vector3 bowForward = Camera.main.ScreenToWorldPoint(screenPosition);
         transform.position = pos;
         transform.forward = bowForward;
+        trailRenderer.enabled = true;
         rb.AddForce(transform.forward * power, ForceMode.Impulse);
         _damage = damage;
     }
@@ -61,5 +62,6 @@ public class Arrow : MonoBehaviour
             effect.transform.position = other.ClosestPoint(transform.position);
             isHit = true;
         }
+        trailRenderer.enabled = false;
     }
 }
