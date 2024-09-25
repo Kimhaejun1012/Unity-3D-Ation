@@ -83,8 +83,8 @@ public class CameraController : MonoBehaviour
     }
     void TargetingOff()
     {
-        rotX -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-        rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        rotX -= Input.GetAxis("Mouse Y") * sensitivity / Time.timeScale * Time.deltaTime;
+        rotY += Input.GetAxis("Mouse X") * sensitivity / Time.timeScale * Time.deltaTime;
 
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
         currentRotate = Quaternion.Euler(rotX, rotY, 0f);

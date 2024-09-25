@@ -13,7 +13,7 @@ public class AttackedTakeDamege : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         stats.HP -= damage;
-        var hpVar = stats.GetComponent<MonsterHpBar>();
-        hpVar?.GetDamage(damage);
+        //var hpVar = stats.GetComponent<MonsterHpBar>();
+        //hpVar?.GetDamage(damage);
     }
 }

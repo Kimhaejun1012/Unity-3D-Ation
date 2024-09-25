@@ -60,8 +60,8 @@ public class Walk : State
         float timeScale = 1f / Time.timeScale;
         player.rb.velocity = moveVec * applySpeed * timeScale;
 
-        smoothHorizontal = Mathf.Lerp(smoothHorizontal, dir.x, 10f * Time.deltaTime);
-        smoothVertical = Mathf.Lerp(smoothVertical, dir.z, 10f * Time.deltaTime);
+        smoothHorizontal = Mathf.Lerp(smoothHorizontal, dir.x, 30f * Time.deltaTime);
+        smoothVertical = Mathf.Lerp(smoothVertical, dir.z, 30f * Time.deltaTime);
         animationHandler.SetFloat("BlendX", smoothHorizontal);
         animationHandler.SetFloat("BlendY", smoothVertical);
     }

@@ -27,6 +27,6 @@ public class AirAim : State
 
         Quaternion targetRotationY = Quaternion.Euler(0f, cameraY, 0f);
 
-        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotationY, Time.deltaTime * 30f);
+        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotationY, Time.deltaTime * 30f / Time.timeScale);
     }
 }

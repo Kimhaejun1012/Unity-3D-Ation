@@ -17,6 +17,8 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] float fireBallCastingTime = 3f;
     [SerializeField] float meleeAttackCoolTime = 5f;
 
+    [SerializeField] bool onGUI;
+
     private void Start()
     {
         originPos = transform.position;
@@ -29,7 +31,10 @@ public class MonsterAI : MonoBehaviour
     }
     private void OnGUI()
     {
-        DrawNode(BTrunner.RootNode);
+        if (onGUI)
+        {
+            DrawNode(BTrunner.RootNode);
+        }
     }
 
     void DrawNode(Node node, int depth = 0)

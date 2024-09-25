@@ -17,6 +17,7 @@ public enum PlayerState
     Air,
     AirAim,
     DodgeAttack,
+    KnockBack,
 }
 
 public class PlayerController : MonoBehaviour
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask groundLayer;
     List<State> states = new();
+    public Vector3 hitDir;
 
     void Awake()
     {
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour
         states.Add(new Air(this, animationrHandler));
         states.Add(new AirAim(this, animationrHandler));
         states.Add(new DodgeAttack(this, animationrHandler));
+        states.Add(new KnockBack(this, animationrHandler));
         SetStateIdle();
     }
     void Update()
@@ -106,5 +109,10 @@ public class PlayerController : MonoBehaviour
     public void SetStateAir()
     {
         ChangeState(PlayerState.Air);
+    }
+    public void Hit(Vector3 dir)
+    {
+        hitDir = dir;
+        ChangeState(PlayerState.KnockBack);
     }
 }
