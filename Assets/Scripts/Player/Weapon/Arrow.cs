@@ -8,14 +8,16 @@ public class Arrow : MonoBehaviour
     private Rigidbody rb;
     public LayerMask monsterLayer;
 
+    TrailRenderer trailRenderer;
     int _damage;
 
-    readonly float power = 30;
+    readonly float power = 100;
     bool isHit = false;
 
     public void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void Update()

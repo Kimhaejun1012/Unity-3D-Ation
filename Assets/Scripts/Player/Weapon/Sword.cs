@@ -62,7 +62,7 @@ public class Sword : BaseWeapon
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
             damageable?.TakeDamage(weaponStats.damage);
-            var effect = ObjectPoolManager.instance.GetPool("HitEffect");
+            var effect = ObjectPoolManager.instance.GetPool("MeleeAttack_Effect");
             effect.transform.position = other.ClosestPoint(transform.position);
             _collider.enabled = false;
         }

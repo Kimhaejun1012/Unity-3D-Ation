@@ -30,7 +30,10 @@ public class ObjectPoolManager : MonoBehaviour
         CreatePool("FireBall", "Projectiles/FireBall", poolSize);
         CreatePool("BlackHole", "Projectiles/BlackHole", poolSize);
 
+
         CreatePool("HitEffect", "Effect/HitEffect", poolSize);
+        CreatePool("BlackHole_Hit", "Effect/BlackHole_Hit", poolSize);
+        CreatePool("MeleeAttack_Effect", "Effect/MeleeAttack_Effect", poolSize);
     }
 
     private void CreatePool(string poolKey, string resourcePath, int poolSize)
@@ -97,6 +100,9 @@ public class ObjectPoolManager : MonoBehaviour
                 break;
             case "HitEffect":
                 resourcePath = "Effect/HitEffect";
+                break;
+            case "BlackHole_Hit":
+                resourcePath = "Effect/BlackHole_Hit";
                 break;
         }
 

@@ -80,5 +80,8 @@ public class BlackHole : MonoBehaviour, IProjectile
             collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection);
             collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
         }
+        ObjectPoolManager.instance.ReturnPool("BlackHole", gameObject);
+        var effect = ObjectPoolManager.instance.GetPool("BlackHole_Hit");
+        effect.transform.position = collision.contacts[0].point;
     }
 }

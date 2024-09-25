@@ -887,6 +887,37 @@ Transform:
   - {fileID: 561400149}
   m_Father: {fileID: 1051617325}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &156911350
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156911351}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &156911351
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156911350}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.714825, y: -3.687751, z: 1.4222633}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &163698447
 GameObject:
   m_ObjectHideFlags: 0
@@ -7938,8 +7969,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923977779}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000059604634, y: 0.15455392, z: -0.000000119209254, w: 0.98798436}
-  m_LocalPosition: {x: 0.15, y: -0.071, z: 0.079}
+  m_LocalRotation: {x: -0.039651655, y: -0.33455426, z: -0.47961196, w: -0.8102306}
+  m_LocalPosition: {x: 0.0476, y: -0.0379, z: -0.0537}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16553,10 +16584,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weakPoint: {fileID: 5268267032977711367}
-  rangeAttackCoolTime: 1
-  blackHoleCastingTime: 3
-  fireBallCastingTime: 100
-  meleeAttackCoolTime: 1
+  rangeAttackCoolTime: 33
+  blackHoleCastingTime: 33
+  fireBallCastingTime: 111
+  meleeAttackCoolTime: 33
   onGUI: 0
 --- !u!114 &5268267032977711362
 MonoBehaviour:
@@ -16585,7 +16616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireBallPos: {fileID: 1795264946}
   arrowPos: {fileID: 743174048}
-  targetPos: {fileID: 1492145639260979169}
+  targetPos: {fileID: 1937639620}
   attackerPos: {fileID: 1980449066}
 --- !u!114 &5268267032977711364
 MonoBehaviour:
@@ -20894,5 +20925,6 @@ SceneRoots:
   - {fileID: 78586071}
   - {fileID: 81125464}
   - {fileID: 271082659}
+  - {fileID: 156911351}
   - {fileID: 3322084419317045440}
   - {fileID: 2086461966}

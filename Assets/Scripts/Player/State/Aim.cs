@@ -13,6 +13,7 @@ public class Aim : State
     }
     public override void Enter()
     {
+        GameManager.instance.CamZoomStart();
         animationHandler.SetBool("Aim", true);
     }
 
