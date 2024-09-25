@@ -11,6 +11,8 @@ public class FireBall : MonoBehaviour, IProjectile
 
     Vector3 originScale;
 
+    int damage = 3;
+
     private void Start()
     {
         originScale = transform.localScale;
@@ -70,5 +72,17 @@ public class FireBall : MonoBehaviour, IProjectile
     public Transform GetAttacker()
     {
         return attacker;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Vector3 hitDirection = collision.contacts[0].normal;
+
+            hitDirection = -hitDirection.normalized;
+
+            collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection);
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+        }
     }
 }

@@ -20,6 +20,7 @@ public class Aim : State
     {
         animationHandler.SetBool("Aim", false);
         animationHandler.ResetTrigger("Attack");
+        GameManager.instance.CamZoomFinish();
     }
 
     public override void Update()

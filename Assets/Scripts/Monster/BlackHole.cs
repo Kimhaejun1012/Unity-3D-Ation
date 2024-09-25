@@ -12,6 +12,8 @@ public class BlackHole : MonoBehaviour, IProjectile
     public Transform attacker;
     public Transform target;
     Vector3 originScale;
+
+    int damage = 5;
     void Start()
     {
         originScale = transform.localScale;
@@ -65,5 +67,18 @@ public class BlackHole : MonoBehaviour, IProjectile
     public Transform GetAttacker()
     {
         return attacker;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Vector3 hitDirection = collision.contacts[0].normal;
+
+            hitDirection = -hitDirection.normalized;
+
+            collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection);
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+        }
     }
 }
