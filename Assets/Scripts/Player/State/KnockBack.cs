@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KnockBack : State
 {
-    float riseTime = 3f;
+    float riseTime = 1f;
     float curDownTime = 0f;
     public KnockBack(PlayerController player, PlayerAnimationHandler animationHandler) : base(player, animationHandler)
     {
@@ -12,8 +12,8 @@ public class KnockBack : State
 
     public override void Enter()
     {
-        Vector3 forceDir = new Vector3(player.hitDir.x, 0.3f, player.hitDir.z);
-        player.rb.AddForce(forceDir * 30f, ForceMode.Impulse);
+        Vector3 forceDir = new Vector3(player.hitDir.x, 0.5f, player.hitDir.z);
+        player.rb.AddForce(forceDir * 5f, ForceMode.Impulse);
         animationHandler.SetTrigger("Hit");
     }
 

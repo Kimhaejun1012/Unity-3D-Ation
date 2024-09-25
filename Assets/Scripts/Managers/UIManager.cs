@@ -8,9 +8,11 @@ public class UIManager : MonoBehaviour
     public static UIManager instance = null;
     public GameObject crossHair;
 
-
     public List<StringBuilder> coolDowns = new List<StringBuilder>();
 
+    public List<GameObject> hearts = new List<GameObject>();
+    public GameObject heartPrefab;
+    public Transform heartContainer;
 
     private void Awake()
     {
@@ -45,5 +47,29 @@ public class UIManager : MonoBehaviour
 
         GUILayout.EndVertical();
         GUILayout.EndArea();
+    }
+    public void HeartInit(int hp)
+    {
+        for (int i = 0; i < hp; i++)
+        {
+            var heart = Instantiate(heartPrefab, heartContainer);
+            hearts.Add(heart);
+        }
+    }
+    public void UpdateHearts(int hp)
+    {
+        int x = hearts.Count - hp;
+        for (int i = 1; i <= x; ++i)
+        {
+            GameObject heart = hearts[hearts.Count - i];
+            if (heart.transform.childCount > 0)
+            {
+                Transform filledHeart = heart.transform.GetChild(1);
+                if (filledHeart != null)
+                {
+                    filledHeart.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 }

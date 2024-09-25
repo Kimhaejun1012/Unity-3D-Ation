@@ -8,7 +8,7 @@ public class ActorStats : MonoBehaviour
 
     public int HP { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         HP = maxHp;
     }
