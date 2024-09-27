@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public UnityEvent camZoom;
     public UnityEvent zoomFinish;
 
+    public GameObject crossHair;
+    public Transform heartContainer;
 
     void Awake()
     {
@@ -28,6 +30,9 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        UIManager.instance.crossHair = crossHair;
+        UIManager.instance.heartContainer = heartContainer;
     }
     public void CamZoomStart()
     {

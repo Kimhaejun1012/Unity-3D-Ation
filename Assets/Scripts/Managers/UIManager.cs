@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -76,5 +78,15 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void StartGame()
+    {
+        SceneManager.LoadScene("LoadingScene");
+    }
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = !EditorApplication.isPlaying;
+#endif
     }
 }

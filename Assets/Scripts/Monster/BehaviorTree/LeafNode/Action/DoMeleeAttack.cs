@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DoMeleeAttack : Node
 {
@@ -19,6 +20,8 @@ public class DoMeleeAttack : Node
     {
         animator.SetTrigger("MeleeAttack");
         _blackboard.SetValue("CurMeleeCool", 0f);
+        var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
+        agent.isStopped = true;
         return NodeState.Success;
 
         //return NodeState.Success;
