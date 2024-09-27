@@ -20,6 +20,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip gameSceneClip;
 
 
+    [SerializeField] private AudioClip meleeAttackClip;
+    [SerializeField] private AudioClip bowReleaseClip;
+
+
     void Awake()
     {
         if (instance == null)
@@ -34,8 +38,10 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
-        //m_MusicBGMSlider.onValueChanged.AddListener(SetMusicVolume);
-        //m_MusicSFXSlider.onValueChanged.AddListener(SetSFXVolume);
+        m_MusicBGMSlider.onValueChanged.AddListener(SetMusicVolume);
+        m_MusicSFXSlider.onValueChanged.AddListener(SetSFXVolume);
+        SetMusicVolume(m_MusicBGMSlider.value);
+        SetSFXVolume(m_MusicSFXSlider.value);
     }
     public void SetMasterVolume(float volume)
     {
@@ -54,5 +60,13 @@ public class SoundManager : MonoBehaviour
     {
         bgmAudio.clip = gameSceneClip;
         bgmAudio.Play();
+    }
+    public void MeleeAttack()
+    {
+        sfxAudio.PlayOneShot(meleeAttackClip);
+    }
+    public void BowRelease()
+    {
+        sfxAudio.PlayOneShot(bowReleaseClip);
     }
 }

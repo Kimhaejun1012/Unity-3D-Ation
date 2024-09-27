@@ -75,5 +75,6 @@ public class Bow : BaseWeapon
     {
         var arrow = ObjectPoolManager.instance.GetPool("Arrow");
         arrow.GetComponent<Arrow>().Init(transform.position, weaponStats.damage);
+        SoundManager.instance.BowRelease();
     }
 }

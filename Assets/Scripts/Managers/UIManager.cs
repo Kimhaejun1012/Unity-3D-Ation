@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     public GameObject heartPrefab;
     public Transform heartContainer;
 
+    [SerializeField] GameObject settingWindow;
+
     private void Awake()
     {
         if (instance == null)
@@ -88,5 +90,13 @@ public class UIManager : MonoBehaviour
 #if UNITY_EDITOR
         EditorApplication.isPlaying = !EditorApplication.isPlaying;
 #endif
+    }
+    public void Setting()
+    {
+        settingWindow.SetActive(true);
+    }
+    public void SettingExit()
+    {
+        settingWindow.SetActive(false);
     }
 }
