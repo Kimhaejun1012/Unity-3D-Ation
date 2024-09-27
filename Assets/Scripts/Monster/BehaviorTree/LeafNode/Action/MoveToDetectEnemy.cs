@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MoveToDetectEnemy : Node
 {
@@ -21,13 +22,15 @@ public class MoveToDetectEnemy : Node
     {
         var transform = _blackboard.GetValue<Transform>("Transform");
         var target = _blackboard.GetValue<Transform>("Target");
+        var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
+        agent.speed = speed;
         if (Vector3.SqrMagnitude(transform.position - target.position) < (2 * 2))
         {
             animator.SetBool("Walk", false);
             return NodeState.Success;
         }
-        transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);
-        transform.LookAt(target);
+        agent.SetDestination(target.position);
+        //transform.LookAt(target);
         animator.SetBool("Walk", true);
         return NodeState.Running;
     }

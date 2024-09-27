@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.XR;
+using UnityEngine.AI;
 
 public class DoRushTarget : Node
 {
@@ -24,12 +23,13 @@ public class DoRushTarget : Node
     {
         var transform = _blackboard.GetValue<Transform>("Transform");
         var target = _blackboard.GetValue<Transform>("Target");
+        var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
+        agent.speed = speed;
 
         if (Vector3.Distance(transform.position, target.position) >= dashAttackRange)
         {
             animator.SetTrigger("Dash");
-            transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * speed);
-            transform.LookAt(target.position);
+            agent.SetDestination(target.position);
         }
         else
         {

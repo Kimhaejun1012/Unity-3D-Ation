@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MoveToOriginPosition : Node
 {
@@ -22,6 +23,8 @@ public class MoveToOriginPosition : Node
 
     public override NodeState Evaluate()
     {
+        var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
+        agent.speed = speed;
         var transform = _blackboard.GetValue<Transform>("Transform");
 
         if (Vector3.SqrMagnitude(_originPos - transform.position) < float.Epsilon * float.Epsilon)
@@ -31,8 +34,7 @@ public class MoveToOriginPosition : Node
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, _originPos, Time.deltaTime * speed);
-            transform.LookAt(_originPos);
+            agent.SetDestination(_originPos);
             animator.SetBool("Walk", true);
             return NodeState.Running;
         }

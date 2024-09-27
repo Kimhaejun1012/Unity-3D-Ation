@@ -5965,6 +5965,51 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0050975056, y: 0.034938443, z: 0.0000031869859}
     m_Extent: {x: 0.0114245685, y: 0.05146112, z: 0.01652583}
   m_DirtyAABB: 0
+--- !u!1 &1457768157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1457768159}
+  - component: {fileID: 1457768158}
+  m_Layer: 0
+  m_Name: ObjectPoolManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1457768158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457768157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f220e4859397dcb47b14ef81f0f0f6a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 20
+--- !u!4 &1457768159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457768157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7371193, y: 1.3964157, z: 0.095905274}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1474823373
 GameObject:
   m_ObjectHideFlags: 0
@@ -10166,8 +10211,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 894002869197506963, guid: 65805c236340e594c9330a3eec7050f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1522550509654619726}
   m_SourcePrefab: {fileID: 100100000, guid: 65805c236340e594c9330a3eec7050f8, type: 3}
+--- !u!1 &1522550509654619725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 894002869197506963, guid: 65805c236340e594c9330a3eec7050f8, type: 3}
+  m_PrefabInstance: {fileID: 1522550509654619724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1522550509654619726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522550509654619725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 2a687f7f1f3155441bb20792f0087d6f, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!4 &1561191566011330150
 Transform:
   m_ObjectHideFlags: 0
@@ -15273,6 +15357,7 @@ GameObject:
   - component: {fileID: 5268267032977711363}
   - component: {fileID: 5268267032977711364}
   - component: {fileID: 5268267032977711365}
+  - component: {fileID: 5268267032977711368}
   m_Layer: 8
   m_Name: Monster
   m_TagString: Monster
@@ -16619,6 +16704,8 @@ MonoBehaviour:
   fireBallCastingTime: 111
   meleeAttackCoolTime: 1
   onGUI: 0
+  walkSpeed: 5
+  dashSpeed: 10
 --- !u!114 &5268267032977711362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16719,6 +16806,28 @@ CapsuleCollider:
   m_Height: 0.3
   m_Direction: 1
   m_Center: {x: 0, y: 1.66, z: 0}
+--- !u!195 &5268267032977711368
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268267032970318698}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!137 &5268267032981823424
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -20982,6 +21091,7 @@ SceneRoots:
   - {fileID: 78586071}
   - {fileID: 81125464}
   - {fileID: 271082659}
+  - {fileID: 1457768159}
   - {fileID: 156911351}
   - {fileID: 3322084419317045440}
   - {fileID: 2086461966}

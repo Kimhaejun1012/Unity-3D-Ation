@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterAI : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] float meleeAttackCoolTime = 5f;
 
     [SerializeField] bool onGUI;
+
+    [SerializeField] int walkSpeed;
+    [SerializeField] int dashSpeed;
 
     private void Start()
     {
@@ -99,6 +103,7 @@ public class MonsterAI : MonoBehaviour
         var rigidbody = GetComponent<Rigidbody>();
         var actorStats = GetComponent<ActorStats>();
         var skillHandler = GetComponent<SkillHandler>();
+        var navMeshAgent = GetComponent<NavMeshAgent>();
 
         blackboard.SetValue("Animator", animator);
         blackboard.SetValue("Transform", transform);
@@ -106,9 +111,10 @@ public class MonsterAI : MonoBehaviour
         blackboard.SetValue("Rigidbody", rigidbody);
         blackboard.SetValue("ActorStats", actorStats);
         blackboard.SetValue("SkillHandler", skillHandler);
+        blackboard.SetValue("NavMeshAgent", navMeshAgent);
 
-        blackboard.SetValue("WalkSpeed", 0);
-        blackboard.SetValue("DashSpeed", 10);
+        blackboard.SetValue("WalkSpeed", walkSpeed);
+        blackboard.SetValue("DashSpeed", dashSpeed);
         blackboard.SetValue("BlackHoleCastingTime", blackHoleCastingTime);
         blackboard.SetValue("FireBallCastingTime", fireBallCastingTime);
         blackboard.SetValue("WeakHit", false);
