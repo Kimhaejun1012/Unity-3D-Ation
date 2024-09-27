@@ -9,7 +9,6 @@ public class LoadingScreen : MonoBehaviour
 {
     public TextMeshProUGUI loadingText;
     public Slider progressBar;
-    float time = 0;
     void Start()
     {
         StartCoroutine(LoadSceneAsync("GameScene"));

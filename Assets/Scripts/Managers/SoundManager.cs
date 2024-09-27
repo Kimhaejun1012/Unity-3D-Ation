@@ -10,8 +10,15 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioMixer m_AudioMixer;
 
+    [SerializeField] private AudioSource bgmAudio;
+    [SerializeField] private AudioSource sfxAudio;
+
     [SerializeField] private Slider m_MusicBGMSlider;
     [SerializeField] private Slider m_MusicSFXSlider;
+
+
+    [SerializeField] private AudioClip gameSceneClip;
+
 
     void Awake()
     {
@@ -34,14 +41,18 @@ public class SoundManager : MonoBehaviour
     {
         m_AudioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
     }
-
     public void SetMusicVolume(float volume)
     {
         m_AudioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
     }
-
     public void SetSFXVolume(float volume)
     {
         m_AudioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+    }
+
+    public void GameSceneEnter()
+    {
+        bgmAudio.clip = gameSceneClip;
+        bgmAudio.Play();
     }
 }
