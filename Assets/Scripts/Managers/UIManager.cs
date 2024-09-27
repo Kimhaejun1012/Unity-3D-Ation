@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     public GameObject crossHair;
 
     public List<StringBuilder> coolDowns = new List<StringBuilder>();
+    public string skillCoolTime;
+    public string meleeCoolTime;
 
     public List<GameObject> hearts = new List<GameObject>();
     public GameObject heartPrefab;
@@ -39,6 +41,9 @@ public class UIManager : MonoBehaviour
 
         GUILayout.BeginArea(new Rect(Screen.width - 250, 30, 240, 300));
         GUILayout.BeginVertical();
+
+        GUILayout.Label(skillCoolTime, style);
+        GUILayout.Label(meleeCoolTime, style);
 
         foreach (var cool in coolDowns)
         {

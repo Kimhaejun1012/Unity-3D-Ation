@@ -30,10 +30,12 @@ public class MoveToOriginPosition : Node
         if (Vector3.SqrMagnitude(_originPos - transform.position) < float.Epsilon * float.Epsilon)
         {
             animator.SetBool("Walk", false);
+            agent.isStopped = true;
             return NodeState.Success;
         }
         else
         {
+            agent.isStopped = false;
             agent.SetDestination(_originPos);
             animator.SetBool("Walk", true);
             return NodeState.Running;

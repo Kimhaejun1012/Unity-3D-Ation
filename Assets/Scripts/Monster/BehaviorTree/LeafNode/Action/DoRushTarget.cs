@@ -29,11 +29,13 @@ public class DoRushTarget : Node
         if (Vector3.Distance(transform.position, target.position) >= dashAttackRange)
         {
             animator.SetTrigger("Dash");
+            agent.isStopped = false;
             agent.SetDestination(target.position);
         }
         else
         {
             animator.ResetTrigger("Dash");
+            agent.isStopped = true;
             return NodeState.Success;
         }
         return NodeState.Running;

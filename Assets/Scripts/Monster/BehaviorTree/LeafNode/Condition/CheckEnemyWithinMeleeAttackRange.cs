@@ -20,7 +20,7 @@ public class CheckEnemyWithinMeleeAttackRange : Node
 
         if (target != null)
         {
-            if (Vector3.SqrMagnitude(transform.position - target.position) < (2 * 2))
+            if (Vector3.SqrMagnitude(transform.position - target.position) < (3 * 3))
             {
                 return NodeState.Success;
             }

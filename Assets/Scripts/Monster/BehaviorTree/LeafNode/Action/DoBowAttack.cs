@@ -15,6 +15,8 @@ public class DoBowAttack : Node
     public override NodeState Evaluate()
     {
         animator.SetTrigger("BowAttack");
+        _blackboard.SetValue("CurSkillCool", 0f);
+
         return NodeState.Success;
     }
 }

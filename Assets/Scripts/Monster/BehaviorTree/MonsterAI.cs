@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class MonsterAI : MonoBehaviour
 {
     BehaviorTreeRunner BTrunner;
-    Blackboard blackboard = new();
+    public Blackboard blackboard = new();
     Vector3 originPos;
 
     [SerializeField] Collider weakPoint;
@@ -33,6 +33,8 @@ public class MonsterAI : MonoBehaviour
     {
         BTrunner?.Operate();
     }
+
+    #region DrawNodeState
     private void OnGUI()
     {
         if (onGUI)
@@ -71,7 +73,7 @@ public class MonsterAI : MonoBehaviour
             DrawNode(child, depth + 1);
         }
     }
-
+    #endregion
     Node BTRunnerInit()
     {
         Blackboard blackboard = BlackBoardInit();
@@ -86,7 +88,14 @@ public class MonsterAI : MonoBehaviour
         hitWeakSequence.AddChild(new CheckWeakHit("CheckWeakHit", blackboard));
         hitWeakSequence.AddChild(new DelayNode("WeakHitDelay", 4f, new DoWeakHitAction("DoWeakHitAction", blackboard)));
 
+        Node skillCoolDown = new SkillCoolDown("skillCoolDown" , blackboard);
+        Node meleeCoolDown = new MeleeAttackCoolDown("MeleeCoolDown", blackboard);
+
         rootNode.AddChild(dieSequence);
+
+        rootNode.AddChild(skillCoolDown);
+        rootNode.AddChild(meleeCoolDown);
+
         rootNode.AddChild(hitWeakSequence);
 
         SetDetectedNode(rootNode);
@@ -96,6 +105,7 @@ public class MonsterAI : MonoBehaviour
         return rootNode;
     }
 
+    #region 블랙보드Init
     Blackboard BlackBoardInit()
     {
         var animator = GetComponent<Animator>();
@@ -117,17 +127,43 @@ public class MonsterAI : MonoBehaviour
         blackboard.SetValue("DashSpeed", dashSpeed);
         blackboard.SetValue("BlackHoleCastingTime", blackHoleCastingTime);
         blackboard.SetValue("FireBallCastingTime", fireBallCastingTime);
+
+        blackboard.SetValue("SkillCoolTime", rangeAttackCoolTime);
+        blackboard.SetValue("MeleeAttackCoolTime", meleeAttackCoolTime);
+        blackboard.SetValue("CurSkillCool", 0f);
+        blackboard.SetValue("CurMeleeCool", 0f);
+
         blackboard.SetValue("WeakHit", false);
+        blackboard.SetValue("SkillReady", false);
+        blackboard.SetValue("MeleeAttackReady", false);
 
         return blackboard;
     }
+    #endregion
 
     void SetDetectedNode(Node rootNode)
     {
         SelectorNode dectedSelector = new("DectedSelector");
+        dectedSelector.AddChild(SetSkillNode());
+
+        DetectedNode detectedNode = new("CheckDetected", dectedSelector, blackboard);
+        dectedSelector.AddChild(SetMeleeAttackNode());
+
+        SequenceNode moveSequence = new("MoveSequence");
+        moveSequence.AddChild(new MoveToDetectEnemy("MoveToDetectEnemy", blackboard));
+
+        dectedSelector.AddChild(moveSequence);
+        rootNode.AddChild(detectedNode);
+    }
+
+    Node SetSkillNode()
+    {
+        SequenceNode skillSequence = new("Skill");
 
         RandomSelectorNode randomSelector = new("RangeAttackRandomSelector");
-        CooldownNode rangeAttackCoolDown = new("RangeAttackCoolDown", rangeAttackCoolTime, randomSelector);
+
+        skillSequence.AddChild(new CheckSkillCoolTime("CheckSkillCoolTime",blackboard));
+        skillSequence.AddChild(randomSelector);
 
         SequenceNode fireBallSequence = new("FireBallSequence");
         fireBallSequence.AddChild(new DoFireBallAttackCasting("WaitFireBallAttack", blackboard));
@@ -145,27 +181,19 @@ public class MonsterAI : MonoBehaviour
         randomSelector.AddChild(bowAttackSequence);
         randomSelector.AddChild(dashAttackSequence);
 
-        dectedSelector.AddChild(rangeAttackCoolDown);
-
-
-        DetectedNode detectedNode = new("CheckDetected", dectedSelector, blackboard);
-
-        rootNode.AddChild(detectedNode);
-
+        return skillSequence;
+    }
+    Node SetMeleeAttackNode()
+    {
         SequenceNode meleeAttackSequence = new("MeleeAttackSequence");
+
         meleeAttackSequence.AddChild(new CheckMeleeAttacking("CheckMeleeAttacking", blackboard));
+
+        meleeAttackSequence.AddChild(new CheckMeleeAttackCoolTime("CheckMeleeAttackCoolTime", blackboard));
         meleeAttackSequence.AddChild(new CheckEnemyWithinMeleeAttackRange("CheckEnemyWithinMeleeAttackRange", blackboard));
-        CooldownNode cooldownNode =
-            new CooldownNode("MeleeAttackCoolDown", meleeAttackCoolTime, new DoMeleeAttack("DoMeleeAttack", blackboard));
-        meleeAttackSequence.AddChild(cooldownNode);
+        meleeAttackSequence.AddChild(new DoMeleeAttack("DoMeleeAttack", blackboard));
 
-        dectedSelector.AddChild(meleeAttackSequence);
-
-        SequenceNode moveSequence = new("MoveSequence");
-        //moveSequence.AddChild(new CheckDetectEnemy("CheckDetectEnemy", blackboard));
-        moveSequence.AddChild(new MoveToDetectEnemy("MoveToDetectEnemy", blackboard));
-
-        dectedSelector.AddChild(moveSequence);
+        return meleeAttackSequence;
     }
 
     public void DestroyMonsterAI()

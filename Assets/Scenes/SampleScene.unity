@@ -639,6 +639,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossHair: {fileID: 788316090}
+  skillCoolTime: 
+  meleeCoolTime: 
   hearts: []
   heartPrefab: {fileID: 2044776656355744711, guid: 9f7c520e3c0ce954eb403bb5f5380877, type: 3}
   heartContainer: {fileID: 1857603694}
@@ -8408,6 +8410,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 548606796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2090887725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2090887727}
+  - component: {fileID: 2090887726}
+  m_Layer: 0
+  m_Name: BlackBoardState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2090887726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090887725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28148d36c862e444bb2bd56508cd4342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterAI: {fileID: 5268267032977711361}
+  curMeleeAttackCool: 0
+  curSkillCool: 0
+  meleeAttackReady: 0
+  skillReady: 0
+--- !u!4 &2090887727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090887725}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.7951277, y: 5.756602, z: -0.18085544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2107930702
 GameObject:
   m_ObjectHideFlags: 0
@@ -13462,7 +13513,7 @@ MonoBehaviour:
   crouchSpeed: 2
   aimSpeed: 3
   walkSpeed: 5
-  runSpeed: 10
+  runSpeed: 30
   rotSpeed: 10
   jumpPower: 5
   dashPower: 5
@@ -16700,10 +16751,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weakPoint: {fileID: 5268267032977711367}
   rangeAttackCoolTime: 33
-  blackHoleCastingTime: 33
-  fireBallCastingTime: 111
-  meleeAttackCoolTime: 1
-  onGUI: 0
+  blackHoleCastingTime: 3
+  fireBallCastingTime: 3
+  meleeAttackCoolTime: 3
+  onGUI: 1
   walkSpeed: 5
   dashSpeed: 10
 --- !u!114 &5268267032977711362
@@ -21095,3 +21146,4 @@ SceneRoots:
   - {fileID: 156911351}
   - {fileID: 3322084419317045440}
   - {fileID: 2086461966}
+  - {fileID: 2090887727}

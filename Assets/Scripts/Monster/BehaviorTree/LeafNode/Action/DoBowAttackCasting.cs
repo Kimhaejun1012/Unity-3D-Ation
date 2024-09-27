@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DoBowAttackCasting : Node
 {
@@ -19,6 +20,8 @@ public class DoBowAttackCasting : Node
         if (animator.GetBool("Attacking"))
         {
             animator.ResetTrigger("BowAttackCasting");
+            var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
+            agent.isStopped = true;
         }
         else
         {

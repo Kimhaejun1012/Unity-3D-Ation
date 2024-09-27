@@ -20,6 +20,8 @@ public class DoFireBallAttack : Node
         //var skillHandler = _blackboard.GetValue<SkillHandler>("SkillHandler");
         //skillHandler.DoFireballSkill
         animator.SetTrigger("FireBall");
+        _blackboard.SetValue("CurSkillCool", 0f);
+
         return NodeState.Success;
     }
 }

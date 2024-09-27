@@ -24,13 +24,14 @@ public class MoveToDetectEnemy : Node
         var target = _blackboard.GetValue<Transform>("Target");
         var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
         agent.speed = speed;
-        if (Vector3.SqrMagnitude(transform.position - target.position) < (2 * 2))
+        if (Vector3.SqrMagnitude(transform.position - target.position) < (3 * 3))
         {
             animator.SetBool("Walk", false);
+            agent.isStopped = true;
             return NodeState.Success;
         }
+        agent.isStopped = false;
         agent.SetDestination(target.position);
-        //transform.LookAt(target);
         animator.SetBool("Walk", true);
         return NodeState.Running;
     }

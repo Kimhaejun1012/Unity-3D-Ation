@@ -6,6 +6,7 @@ using UnityEngine.XR;
 public class DetectedNode : Node
 {
     Blackboard _blackboard;
+    Animator animator;
     Node child;
     float detectRange = 20f;
     Transform transform;
@@ -15,6 +16,7 @@ public class DetectedNode : Node
     {
         _blackboard = blackboard;
         transform = _blackboard.GetValue<Transform>("Transform");
+        animator = _blackboard.GetValue<Animator>("Animator");
         child = node;
         AddChild(child);
     }
@@ -23,6 +25,10 @@ public class DetectedNode : Node
     {
         var overlapColliders = Physics.OverlapSphere(transform.position, detectRange, LayerMask.GetMask("Player"));
 
+        if(animator.GetBool("Attacking"))
+        {
+            return child.Evaluate();
+        }
         if (overlapColliders != null && overlapColliders.Length > 0)
         {
             target = overlapColliders[0].transform;

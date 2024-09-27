@@ -18,6 +18,7 @@ public class DoDashAttack : Node
     public override NodeState Evaluate()
     {
         animator.SetTrigger("DashAttack");
+        _blackboard.SetValue("CurSkillCool", 0f);
         return NodeState.Success;
     }
 }

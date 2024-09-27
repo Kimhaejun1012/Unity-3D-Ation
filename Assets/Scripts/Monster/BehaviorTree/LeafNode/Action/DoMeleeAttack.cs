@@ -18,6 +18,7 @@ public class DoMeleeAttack : Node
     public override NodeState Evaluate()
     {
         animator.SetTrigger("MeleeAttack");
+        _blackboard.SetValue("CurMeleeCool", 0f);
         return NodeState.Success;
 
         //return NodeState.Success;

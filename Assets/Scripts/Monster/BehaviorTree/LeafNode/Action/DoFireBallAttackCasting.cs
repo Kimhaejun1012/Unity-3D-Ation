@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DoFireBallAttackCasting : Node
 {
@@ -19,6 +20,8 @@ public class DoFireBallAttackCasting : Node
         if (animator.GetBool("Attacking"))
         {
             //animator.ResetTrigger("FireBallCasting");
+            var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
+            agent.isStopped = true;
         }
         else
         {
