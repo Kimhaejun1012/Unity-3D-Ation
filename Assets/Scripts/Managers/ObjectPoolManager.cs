@@ -29,11 +29,12 @@ public class ObjectPoolManager : MonoBehaviour
         CreatePool("Arrow", "Projectiles/Arrow", poolSize);
         CreatePool("FireBall", "Projectiles/FireBall", poolSize);
         CreatePool("BlackHole", "Projectiles/BlackHole", poolSize);
-
+        CreatePool("Parrying", "Projectiles/ParryingProjectile", poolSize);
 
         CreatePool("HitEffect", "Effect/HitEffect", poolSize);
         CreatePool("BlackHole_Hit", "Effect/BlackHole_Hit", poolSize);
         CreatePool("MeleeAttack_Effect", "Effect/MeleeAttack_Effect", poolSize);
+        CreatePool("Parrying_Hit", "Effect/Parrying_Hit", poolSize);
     }
 
     private void CreatePool(string poolKey, string resourcePath, int poolSize)

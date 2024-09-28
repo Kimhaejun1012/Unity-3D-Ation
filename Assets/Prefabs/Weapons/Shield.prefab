@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 1164970963957116320}
   - component: {fileID: 6669313510275637101}
   - component: {fileID: 8878562286611100041}
+  - component: {fileID: 2510545329393567041}
   - component: {fileID: 3087088407628001141}
   - component: {fileID: -8840294575025146591}
-  - component: {fileID: 2510545329393567041}
-  m_Layer: 0
+  - component: {fileID: -7399551031582561866}
+  m_Layer: 12
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,6 +87,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2510545329393567041
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657402259589451117}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 0.58306307, y: 0.23, z: 0.58306307}
+  m_Center: {x: 0.000000022947436, y: 0.07, z: -0.000000016221254}
 --- !u!65 &3087088407628001141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -124,24 +146,30 @@ MonoBehaviour:
   projectile: {fileID: 0}
   triggerCollider: {fileID: 3087088407628001141}
   nonTriggerCollider: {fileID: 2510545329393567041}
---- !u!65 &2510545329393567041
-BoxCollider:
+--- !u!54 &-7399551031582561866
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8657402259589451117}
-  m_Material: {fileID: 0}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 0.58306307, y: 0.38, z: 0.58306307}
-  m_Center: {x: 0.000000022947436, y: 0.2, z: -0.000000016221254}
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - MonsterWeapon
   - EnemyProjectile
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - PlayerProjectiles
   - EnemyProjectiles
   - MonsterWeapon
-  - 
+  - Shield
   - 
   - 
   - 

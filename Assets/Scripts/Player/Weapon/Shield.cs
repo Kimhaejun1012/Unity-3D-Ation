@@ -34,17 +34,19 @@ public class Shield : BaseWeapon
         {
             if (canParrying)
             {
-                var temp = Instantiate(parryingPrefab, transform.position, Quaternion.identity);
+                //[TODO] 디스트로이가 아니라 리턴풀 해야됨
+                //ObjectPoolManager.instance.ReturnPool(projectile);
+                var pos = projectile.transform.position;
+                var temp = ObjectPoolManager.instance.GetPool("Parrying");
                 var targetPos = projectile.GetComponent<IProjectile>().GetAttacker();
                 var dir = targetPos.position - transform.position;
-                temp.GetComponent<Rigidbody>().AddForce(dir * 10f, ForceMode.Impulse);
-                Destroy(projectile.gameObject);
+                temp.GetComponent<ParryingProjectile>().Init(dir, pos);
                 TimeManager.instance.ParryingSlowMotion();
+                projectile = null;
                 canParrying = false;
             }
             else
             {
-                Debug.Log("Failure Parrying");
             }
             animationHandler.SetTrigger("Parrying");
         }
@@ -91,10 +93,11 @@ public class Shield : BaseWeapon
     {
         if (other.CompareTag("EnemyProjectile"))
         {
+            animationHandler.SetTrigger("Block");
             projectile = other.gameObject;
             canParrying = true;
         }
-        else if(other.CompareTag("MonsterWeapon"))
+        else if (other.CompareTag("MonsterWeapon"))
         {
             canDodge = true;
         }
@@ -110,5 +113,13 @@ public class Shield : BaseWeapon
         {
             canDodge = false;
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "MonsterWeapon")
+        {
+            animationHandler.SetTrigger("Block");
+        }
+            canParrying = false;
     }
 }

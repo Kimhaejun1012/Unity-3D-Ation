@@ -24,7 +24,7 @@ public class Bow : BaseWeapon
         {
             HandleMouseDown();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && animationHandler.GetBool("IsReady"))
         {
             HandleMouseUp();
         }
@@ -47,7 +47,6 @@ public class Bow : BaseWeapon
     }
     private void HandleMouseUp()
     {
-
         switch (player.state)
         {
             case PlayerState.Idle:
@@ -75,6 +74,6 @@ public class Bow : BaseWeapon
     {
         var arrow = ObjectPoolManager.instance.GetPool("Arrow");
         arrow.GetComponent<Arrow>().Init(transform.position, weaponStats.damage);
-        SoundManager.instance.BowRelease();
+        //SoundManager.instance.BowRelease();
     }
 }

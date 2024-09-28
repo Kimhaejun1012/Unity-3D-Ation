@@ -11,6 +11,7 @@ public class AirAim : State
     }
     public override void Enter()
     {
+        animationHandler.ResetTrigger("Cancel");
         animationHandler.SetTrigger("AirAim");
         TimeManager.instance.ApplySlowMotion();
     }
@@ -18,6 +19,8 @@ public class AirAim : State
     public override void Exit()
     {
         animationHandler.ResetTrigger("Attack");
+        animationHandler.SetTrigger("Cancel");
+        GameManager.instance.CamZoomFinish();
         TimeManager.instance.SetTimeScaleOne();
     }
 
@@ -28,5 +31,14 @@ public class AirAim : State
         Quaternion targetRotationY = Quaternion.Euler(0f, cameraY, 0f);
 
         player.transform.rotation = Quaternion.Slerp(player.transform.rotation, targetRotationY, Time.deltaTime * 30f / Time.timeScale);
+
+        if (player.rb.velocity.y < 0)
+        {
+            if (Physics.Raycast(player.transform.position + Vector3.up * 0.2f, Vector3.down, 0.2f, player.groundLayer))
+            {
+                animationHandler.SetTrigger("Landing");
+                player.SetStateIdle();
+            }
+        }
     }
 }

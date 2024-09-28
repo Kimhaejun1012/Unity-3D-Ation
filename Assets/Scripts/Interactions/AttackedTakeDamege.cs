@@ -18,7 +18,10 @@ public class AttackedTakeDamege : MonoBehaviour, IDamageable
         {
             UIManager.instance.UpdateHearts(stats.HP);
         }
-        //var hpVar = stats.GetComponent<MonsterHpBar>();
-        //hpVar?.GetDamage(damage);
+        else
+        {
+            var hpVar = stats.GetComponent<MonsterHpBar>();
+            hpVar?.GetDamage(damage);
+        }
     }
 }

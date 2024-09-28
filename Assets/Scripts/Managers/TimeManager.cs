@@ -7,7 +7,7 @@ public class TimeManager : MonoBehaviour
     public static TimeManager instance = null;
     public Animator animator;
 
-    float slowFactor = 0.3f;
+    float slowFactor = 0.1f;
     float dodgeSlowFactor = 0.1f;
     float slowMotionDuration = 0.5f;
     float transitionDuration = 1f;
@@ -56,6 +56,7 @@ public class TimeManager : MonoBehaviour
     public void SetTimeScaleOne()
     {
         Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
         animator.speed = 1;
     }
     public void ParryingSlowMotion()

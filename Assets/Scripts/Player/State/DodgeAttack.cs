@@ -15,6 +15,7 @@ public class DodgeAttack : State
 
     public override void Enter()
     {
+        player.isKnockBack = true;
         isLanding = false;
         isArrive = false;
         targetMonster = FindClosestMonster();
@@ -22,6 +23,8 @@ public class DodgeAttack : State
 
     public override void Exit()
     {
+        TimeManager.instance.SetTimeScaleOne();
+        player.isKnockBack = false;
     }
 
     public override void Update()
@@ -29,6 +32,7 @@ public class DodgeAttack : State
         if (Physics.Raycast(player.transform.position + Vector3.up * 0.2f, Vector3.down, 0.2f, player.groundLayer) && !isLanding)
         {
             isLanding = true;
+            TimeManager.instance.ApplySlowMotion();
             animationHandler.SetTrigger("Dash");
         }
         else if (targetMonster != null && isLanding)
@@ -37,7 +41,7 @@ public class DodgeAttack : State
 
             if (distance > approachDistance)
             {
-                player.transform.position = Vector3.Lerp(player.transform.position, targetMonster.position, speed * Time.deltaTime);
+                player.transform.position = Vector3.Lerp(player.transform.position, targetMonster.position, speed * Time.unscaledDeltaTime);
             }
             else if (!isArrive)
             {

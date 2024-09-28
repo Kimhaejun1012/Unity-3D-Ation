@@ -11,6 +11,7 @@ public class Dodge : State
     }
     public override void Enter()
     {
+        player.isKnockBack = true;
         animationHandler.SetTrigger("Dodge");
         Vector3 backRoll = -player.transform.forward * backPower + Vector3.up * upPower;
         backRoll.Normalize();
@@ -19,6 +20,7 @@ public class Dodge : State
 
     public override void Exit()
     {
+        player.isKnockBack = false;
     }
 
     public override void Update()

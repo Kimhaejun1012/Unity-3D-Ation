@@ -24,20 +24,22 @@ public class MonsterWeapon : MonoBehaviour
 
             hitDirection = -hitDirection.normalized;
 
-            collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection);
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection, damage);
         }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
         {
-            Vector3 hitDirection = collision.contacts[0].normal;
-
-            hitDirection = -hitDirection.normalized;
-
-            collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection);
-            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
         }
     }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        Vector3 hitDirection = collision.contacts[0].normal;
+
+    //        hitDirection = -hitDirection.normalized;
+
+    //        collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection);
+    //        collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+    //    }
+    //}
 }

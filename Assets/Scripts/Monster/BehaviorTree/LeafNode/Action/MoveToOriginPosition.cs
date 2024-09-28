@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,7 +26,7 @@ public class MoveToOriginPosition : Node
         agent.speed = speed;
         var transform = _blackboard.GetValue<Transform>("Transform");
 
-        if (Vector3.SqrMagnitude(_originPos - transform.position) < float.Epsilon * float.Epsilon)
+        if (Vector3.SqrMagnitude(_originPos - transform.position) < 0.1f)
         {
             animator.SetBool("Walk", false);
             agent.isStopped = true;

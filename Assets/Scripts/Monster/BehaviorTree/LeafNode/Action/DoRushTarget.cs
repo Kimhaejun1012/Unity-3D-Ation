@@ -26,6 +26,11 @@ public class DoRushTarget : Node
         var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
         agent.speed = speed;
 
+        if (animator.GetBool("Attacking"))
+        {
+            return NodeState.Failure;
+        }
+
         if (Vector3.Distance(transform.position, target.position) >= dashAttackRange)
         {
             animator.SetTrigger("Dash");
@@ -34,6 +39,7 @@ public class DoRushTarget : Node
         }
         else
         {
+
             animator.ResetTrigger("Dash");
             agent.isStopped = true;
             return NodeState.Success;

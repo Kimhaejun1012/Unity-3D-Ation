@@ -2,6 +2,7 @@ using UnityEditor;
 
 public class EditorShortcuts
 {
+#if UNITY_EDITOR
     [MenuItem("Custom/Controls/PlayPause _F1")]
     private static void PlayPauseToggle()
     {
@@ -13,4 +14,5 @@ public class EditorShortcuts
     {
         EditorApplication.isPaused = !EditorApplication.isPaused;
     }
+#endif
 }

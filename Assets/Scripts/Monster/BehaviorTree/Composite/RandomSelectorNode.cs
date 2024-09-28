@@ -21,7 +21,7 @@ public sealed class RandomSelectorNode : Node
         if (!_currentChildIndex.HasValue)
         {
             //_currentChildIndex = _random.Next(_childs.Count);
-            _currentChildIndex = 0;
+            _currentChildIndex = 2;
         }
 
         NodeState result = _childs[_currentChildIndex.Value].Evaluate();

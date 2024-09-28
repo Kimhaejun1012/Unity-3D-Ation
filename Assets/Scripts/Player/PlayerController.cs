@@ -111,10 +111,13 @@ public class PlayerController : MonoBehaviour
     {
         ChangeState(PlayerState.Air);
     }
-    public void Hit(Vector3 dir)
+    public void Hit(Vector3 dir, int damage)
     {
         hitDir = dir;
         if (!isKnockBack)
+        {
             ChangeState(PlayerState.KnockBack);
+            GetComponent<IDamageable>().TakeDamage(damage);
+        }
     }
 }
