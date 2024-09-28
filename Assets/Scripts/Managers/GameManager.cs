@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.crossHair = crossHair;
         UIManager.instance.heartContainer = heartContainer;
 
-        SoundManager.instance.GameSceneEnter();
+        //SoundManager.instance.GameSceneEnter();
     }
     public void CamZoomStart()
     {

@@ -16582,7 +16582,7 @@ MonoBehaviour:
   blackHoleCastingTime: 3
   fireBallCastingTime: 33
   meleeAttackCoolTime: 3
-  onGUI: 1
+  onGUI: 0
   walkSpeed: 5
   dashSpeed: 10
 --- !u!114 &5268267032977711362
