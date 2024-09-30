@@ -27,6 +27,16 @@ public class Arrow : MonoBehaviour
             transform.forward = rb.velocity.normalized;
         }
     }
+    void OnEnable()
+    {
+        StartCoroutine(DeactivateAfterDelay());
+    }
+
+    private IEnumerator DeactivateAfterDelay()
+    {
+        yield return new WaitForSeconds(10f);
+        ObjectPoolManager.instance.ReturnPool("Arrow", gameObject);
+    }
     public void Init(Vector3 pos, int damage)
     {
         Vector3 screenPosition = UIManager.instance.crossHair.transform.position;

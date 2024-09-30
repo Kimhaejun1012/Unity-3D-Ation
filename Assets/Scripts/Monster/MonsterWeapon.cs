@@ -5,6 +5,13 @@ using UnityEngine;
 public class MonsterWeapon : MonoBehaviour
 {
     int damage = 1;
+    public Collider weaponCollider;
+
+    private void Start()
+    {
+        weaponCollider = GetComponent<Collider>();
+        weaponCollider.enabled = false;
+    }
     //private void OnTriggerEnter(Collider other)
     //{
     //    Debug.Log(other.tag);
@@ -21,7 +28,6 @@ public class MonsterWeapon : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Vector3 hitDirection = collision.contacts[0].normal;
-
             hitDirection = -hitDirection.normalized;
 
             collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection, damage);

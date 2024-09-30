@@ -33,7 +33,7 @@ public class Walk : State
 
         moveVec = (moveH + moveV).normalized;
         float timeScale = 1f / Time.timeScale;
-        player.rb.velocity = moveVec * applySpeed * timeScale;
+        player.rb.velocity = new Vector3(moveVec.x * applySpeed, player.rb.velocity.y -1f, moveVec.z * applySpeed);
 
         smoothHorizontal = Mathf.Lerp(smoothHorizontal, dir.x, 10f * Time.deltaTime);
         smoothVertical = Mathf.Lerp(smoothVertical, dir.z, 10f * Time.deltaTime);

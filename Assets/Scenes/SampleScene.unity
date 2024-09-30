@@ -7591,6 +7591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4cf00e4b01d044a86cd0fc2391fe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponCollider: {fileID: 0}
 --- !u!54 &1832950055
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14268,6 +14269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4cf00e4b01d044a86cd0fc2391fe87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponCollider: {fileID: 0}
 --- !u!54 &5080030918557254641
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15469,6 +15471,7 @@ GameObject:
   - component: {fileID: 5268267032977711364}
   - component: {fileID: 5268267032977711365}
   - component: {fileID: 5268267032977711368}
+  - component: {fileID: 5268267032977711369}
   m_Layer: 8
   m_Name: Monster
   m_TagString: Monster
@@ -16811,8 +16814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weakPoint: {fileID: 5268267032977711367}
   rangeAttackCoolTime: 3
-  blackHoleCastingTime: 5
-  fireBallCastingTime: 5
+  blackHoleCastingTime: 3
+  fireBallCastingTime: 3
   meleeAttackCoolTime: 3
   onGUI: 1
   walkSpeed: 5
@@ -16939,6 +16942,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &5268267032977711369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268267032970318698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e3dff866911394dbf0ddcad348a0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 5080030918557254640}
 --- !u!137 &5268267032981823424
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

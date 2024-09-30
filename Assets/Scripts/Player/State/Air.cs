@@ -21,7 +21,7 @@ public class Air : State
     {
         if (player.rb.velocity.y < 0)
         {
-            if (Physics.Raycast(player.transform.position + Vector3.up * 0.2f, Vector3.down, 0.2f, player.groundLayer))
+            if (Physics.Raycast(player.transform.position + Vector3.up * 0.2f, Vector3.down, 0.3f, player.groundLayer))
             {
                 animationHandler.SetTrigger("Landing");
                 player.SetStateIdle();

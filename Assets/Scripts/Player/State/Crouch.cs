@@ -27,7 +27,7 @@ public class Crouch : State
         Vector3 moveV = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * dir.z;
 
         moveVec = (moveH + moveV).normalized;
-        player.rb.velocity = moveVec * applySpeed;
+        player.rb.velocity = new Vector3(moveVec.x * applySpeed, player.rb.velocity.y -1f, moveVec.z * applySpeed);
 
         if (dir != Vector3.zero)
         {

@@ -14,6 +14,10 @@ public class DoBowAttack : Node
     }
     public override NodeState Evaluate()
     {
+        var transform = _blackboard.GetValue<Transform>("Transform");
+        var target = _blackboard.GetValue<Transform>("Target");
+
+        transform.LookAt(target);
         animator.SetTrigger("BowAttack");
         _blackboard.SetValue("CurSkillCool", 0f);
 

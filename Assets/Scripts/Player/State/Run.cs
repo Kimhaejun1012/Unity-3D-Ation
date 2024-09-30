@@ -26,9 +26,8 @@ public class Run : State
         Vector3 moveV = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)) * dir.z;
 
         moveVec = (moveH + moveV).normalized;
-        float timeScale = 1f / Time.timeScale;
 
-        player.rb.velocity = moveVec * applySpeed * timeScale;
+        player.rb.velocity = new Vector3(moveVec.x * applySpeed, player.rb.velocity.y - 1f, moveVec.z * applySpeed);
 
         if (dir != Vector3.zero)
         {

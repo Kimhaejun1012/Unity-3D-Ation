@@ -27,18 +27,27 @@ public class TargetingSystem : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            currentTarget = FindClosestTargetInView();
+            if (currentTarget == null)
+            {
+                currentTarget = FindClosestTargetInView();
+            }
+            else
+            {
+                currentTarget = null;
+                playerController.TargetingBool();
+            }
             OnTargeting?.Invoke(currentTarget);
         }
-        else if (Input.GetKeyUp(KeyCode.F))
-        {
-            if (currentTarget != null)
-            {
-                playerController.TargetingBool();
-                currentTarget = null;
-                OnTargeting?.Invoke(currentTarget);
-            }
-        }
+        //}
+        //else if (Input.GetKeyUp(KeyCode.F))
+        //{
+        //    if (currentTarget != null)
+        //    {
+        //        playerController.TargetingBool();
+        //        currentTarget = null;
+        //        OnTargeting?.Invoke(currentTarget);
+        //    }
+        //}
         if (currentTarget != null)
         {
             //player.LookAt(currentTarget);
