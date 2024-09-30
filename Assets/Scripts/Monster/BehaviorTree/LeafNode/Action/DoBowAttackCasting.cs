@@ -18,9 +18,7 @@ public class DoBowAttackCasting : Node
     {
         if (animator.GetBool("Attacking"))
         {
-            animator.ResetTrigger("BowAttackCasting");
             var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
-
             agent.isStopped = true;
         }
         else

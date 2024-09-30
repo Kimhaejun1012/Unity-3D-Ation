@@ -84,4 +84,9 @@ public class FireBall : MonoBehaviour, IProjectile
         }
         ObjectPoolManager.instance.ReturnPool("FireBall", gameObject);
     }
+
+    public void ReturnObject()
+    {
+        ObjectPoolManager.instance.ReturnPool("FireBall", gameObject);
+    }
 }

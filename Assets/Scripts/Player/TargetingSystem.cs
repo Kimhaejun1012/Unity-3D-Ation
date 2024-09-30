@@ -56,7 +56,7 @@ public class TargetingSystem : MonoBehaviour
             Quaternion targetRotationY = Quaternion.Euler(0f, cameraY, 0f);
             player.transform.rotation = targetRotationY;
             targetObj.SetActive(true);
-            Vector3 headPosition = currentTarget.position + new Vector3(0, 4, 0);
+            Vector3 headPosition = currentTarget.position + new Vector3(0, 5, 0);
             targetObj.transform.position = headPosition;
         }
         else

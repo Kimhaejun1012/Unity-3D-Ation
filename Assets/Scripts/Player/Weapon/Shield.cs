@@ -35,7 +35,7 @@ public class Shield : BaseWeapon
             if (canParrying)
             {
                 //[TODO] 디스트로이가 아니라 리턴풀 해야됨
-                //ObjectPoolManager.instance.ReturnPool(projectile);
+                projectile.GetComponent<IProjectile>().ReturnObject();
                 var pos = projectile.transform.position;
                 var temp = ObjectPoolManager.instance.GetPool("Parrying");
                 var targetPos = projectile.GetComponent<IProjectile>().GetAttacker();

@@ -83,4 +83,9 @@ public class BlackHole : MonoBehaviour, IProjectile
         var effect = ObjectPoolManager.instance.GetPool("BlackHole_Hit");
         effect.transform.position = collision.contacts[0].point;
     }
+
+    public void ReturnObject()
+    {
+        ObjectPoolManager.instance.ReturnPool("BlackHole", gameObject);
+    }
 }

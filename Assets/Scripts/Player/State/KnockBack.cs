@@ -14,7 +14,7 @@ public class KnockBack : State
     {
         player.isKnockBack = true;
         Vector3 forceDir = new Vector3(player.hitDir.x, 0.5f, player.hitDir.z);
-        player.rb.AddForce(forceDir * 5f, ForceMode.Impulse);
+        player.rb.AddForce(forceDir * 2f, ForceMode.Impulse);
         animationHandler.SetTrigger("Hit");
     }
 
