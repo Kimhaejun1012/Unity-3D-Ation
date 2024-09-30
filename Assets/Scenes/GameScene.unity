@@ -22963,8 +22963,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weakPoint: {fileID: 5268267032977711367}
-  rangeAttackCoolTime: 5
-  blackHoleCastingTime: 3
+  rangeAttackCoolTime: 8
+  blackHoleCastingTime: 2
   fireBallCastingTime: 3
   meleeAttackCoolTime: 3
   onGUI: 1
