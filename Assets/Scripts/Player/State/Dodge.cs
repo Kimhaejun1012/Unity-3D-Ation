@@ -15,7 +15,7 @@ public class Dodge : State
         animationHandler.SetTrigger("Dodge");
         Vector3 backRoll = -player.transform.forward * backPower + Vector3.up * upPower;
         backRoll.Normalize();
-        player.rb.AddForce(backRoll * 6f, ForceMode.Impulse);
+        player.rb.AddForce(backRoll * 3f, ForceMode.Impulse);
     }
 
     public override void Exit()

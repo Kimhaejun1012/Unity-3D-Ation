@@ -25,10 +25,12 @@ public class DetectedNode : Node
     {
         var overlapColliders = Physics.OverlapSphere(transform.position, detectRange, LayerMask.GetMask("Player"));
 
-        if(animator.GetBool("Attacking"))
+        if (animator.GetBool("SkillCasting"))
         {
             return child.Evaluate();
         }
+
+
         if (overlapColliders != null && overlapColliders.Length > 0)
         {
             target = overlapColliders[0].transform;

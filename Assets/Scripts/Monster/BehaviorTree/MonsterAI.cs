@@ -161,6 +161,8 @@ public class MonsterAI : MonoBehaviour
 
         RandomSelectorNode randomSelector = new("RangeAttackRandomSelector");
 
+
+        skillSequence.AddChild(new CheckMeleeAttacking("CheckAttacking", blackboard));
         skillSequence.AddChild(new CheckSkillCoolTime("CheckSkillCoolTime",blackboard));
         skillSequence.AddChild(randomSelector);
 

@@ -18,7 +18,7 @@ public class DoFireBallAttackCasting : Node
 
     public override NodeState Evaluate()
     {
-        if (animator.GetBool("Attacking"))
+        if (animator.GetBool("SkillCasting"))
         {
             //animator.ResetTrigger("FireBallCasting");
             var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
@@ -37,7 +37,7 @@ public class DoFireBallAttackCasting : Node
             var skillHandler = _blackboard.GetValue<SkillHandler>("SkillHandler");
             var fireballCastingTime = _blackboard.GetValue<float>("FireBallCastingTime");
             skillHandler.DoFireballSkill(fireballCastingTime);
-            animator.SetBool("Attacking", true);
+            animator.SetBool("SkillCasting", true);
             animator.SetTrigger("FireBallCasting");
         }
         return NodeState.Success;

@@ -13,15 +13,5 @@ public class AttackedTakeDamege : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         stats.HP -= damage;
-
-        if(stats is PlayerStats)
-        {
-            UIManager.instance.UpdateHearts(stats.HP);
-        }
-        else
-        {
-            var hpVar = stats.GetComponent<MonsterHpBar>();
-            hpVar?.GetDamage(damage);
-        }
     }
 }

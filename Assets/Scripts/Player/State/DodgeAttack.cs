@@ -56,7 +56,7 @@ public class DodgeAttack : State
         float closestDistanceSqr = Mathf.Infinity;
         Transform closestEnemy = null;
         Vector3 currentPosition = player.transform.position;
-        float detectionRadius = 30.0f;
+        float detectionRadius = 50.0f;
 
         Collider[] colliders = Physics.OverlapSphere(currentPosition, detectionRadius);
         foreach (Collider collider in colliders)

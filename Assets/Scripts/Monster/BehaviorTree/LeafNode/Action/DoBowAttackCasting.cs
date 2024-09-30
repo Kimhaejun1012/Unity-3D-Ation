@@ -16,7 +16,7 @@ public class DoBowAttackCasting : Node
 
     public override NodeState Evaluate()
     {
-        if (animator.GetBool("Attacking"))
+        if (animator.GetBool("SkillCasting"))
         {
             var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
             agent.isStopped = true;
@@ -25,8 +25,12 @@ public class DoBowAttackCasting : Node
         {
             var skillHandler = _blackboard.GetValue<SkillHandler>("SkillHandler");
             var castingTime = _blackboard.GetValue<float>("BlackHoleCastingTime");
+            var transform = _blackboard.GetValue<Transform>("Transform");
+            var target = _blackboard.GetValue<Transform>("Target");
+
+            transform.LookAt(target);
             skillHandler.DoBlackHoleAttack(castingTime);
-            animator.SetBool("Attacking", true);
+            animator.SetBool("SkillCasting", true);
             animator.SetTrigger("BowAttackCasting");
         }
         return NodeState.Success;

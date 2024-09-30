@@ -116,8 +116,25 @@ public class PlayerController : MonoBehaviour
         hitDir = dir;
         if (!isKnockBack)
         {
-            ChangeState(PlayerState.KnockBack);
             GetComponent<IDamageable>().TakeDamage(damage);
         }
+
+        var hp = GetComponent<PlayerStats>().HP;
+
+        if (hp <= 0)
+        {
+            UIManager.instance.UpdateHearts(0);
+            Die();
+        }
+        else
+        {
+            UIManager.instance.UpdateHearts(hp);
+            ChangeState(PlayerState.KnockBack);
+        }
+    }
+    public void Die()
+    {
+        animationrHandler.SetTrigger("Die");
+        Destroy(this);
     }
 }
