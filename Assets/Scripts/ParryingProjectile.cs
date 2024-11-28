@@ -6,11 +6,12 @@ public class ParryingProjectile : MonoBehaviour
 {
     Rigidbody rb;
     int damage = 3;
+    float power = 10f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
-    float power = 10f;
     public void Init(Vector3 dir, Vector3 pos)
     {
         transform.position = pos;

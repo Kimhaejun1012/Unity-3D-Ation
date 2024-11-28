@@ -5,13 +5,13 @@ using UnityEngine.UIElements;
 
 public class Arrow : MonoBehaviour
 {
-    private Rigidbody rb;
+    Rigidbody rb;
+    TrailRenderer trailRenderer;
     public LayerMask monsterLayer;
 
-    TrailRenderer trailRenderer;
-    int _damage;
-
     readonly float power = 100;
+
+    int _damage;
     bool isHit = false;
 
     public void Awake()

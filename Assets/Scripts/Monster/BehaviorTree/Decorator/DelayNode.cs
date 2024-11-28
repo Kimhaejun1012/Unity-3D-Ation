@@ -6,7 +6,7 @@ using UnityEngine;
 public class DelayNode : Node
 {
     Node _node;
-    private float cooldownTime;
+    float cooldownTime;
     private float curTime;
 
     StringBuilder coolDown = new StringBuilder();

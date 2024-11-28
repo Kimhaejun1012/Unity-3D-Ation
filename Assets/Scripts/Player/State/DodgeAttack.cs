@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class DodgeAttack : State
 {
-    private Transform targetMonster;
-    private float approachDistance = 2f;
+    Transform targetMonster;
+    float speed = 5f;
+    float approachDistance = 2f;
     bool isArrive = false;
     bool isLanding = false;
-    private float speed = 5f;
 
     public DodgeAttack(PlayerController player, PlayerAnimationHandler animationHandler)
         : base(player, animationHandler)

@@ -6,11 +6,9 @@ public class CheckDetectEnemy : Node
 {
     Blackboard _blackboard;
 
-    Animator animator;
     public CheckDetectEnemy(string name, Blackboard blackboard) : base(name)
     {
         _blackboard = blackboard;
-        animator = _blackboard.GetValue<Animator>("Animator");
     }
 
     public override NodeState Evaluate()

@@ -8,7 +8,7 @@ public class UntilFailNode : Node
 
     public override NodeState Evaluate()
     {
-        NodeState childState = _childs[0].Evaluate();
+        NodeState childState = childs[0].Evaluate();
         if (childState == NodeState.Failure)
         {
             return NodeState.Failure;

@@ -6,10 +6,10 @@ public sealed class SelectorNode : Node
     public SelectorNode(string name) : base(name) { }
     public override NodeState Evaluate()
     {
-        if (_childs == null)
+        if (childs == null)
             return NodeState.Failure;
 
-        foreach (var child in _childs)
+        foreach (var child in childs)
         {
             switch (child.Evaluate())
             {

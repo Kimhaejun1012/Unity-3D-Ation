@@ -7,14 +7,11 @@ public class CheckRangedAttackCooldown : Node
 {
     Blackboard _blackboard;
 
-    Animator animator;
-
-    private float cooldownTime = 5f;
-    private float lastTime = -Mathf.Infinity;
+    float cooldownTime = 5f;
+    float lastTime = -Mathf.Infinity;
     public CheckRangedAttackCooldown(string name, Blackboard blackboard) : base(name)
     {
         _blackboard = blackboard;
-        animator = _blackboard.GetValue<Animator>("Animator");
     }
 
     public override NodeState Evaluate()

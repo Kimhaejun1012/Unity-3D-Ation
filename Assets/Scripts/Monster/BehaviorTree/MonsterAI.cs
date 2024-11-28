@@ -8,6 +8,7 @@ public class MonsterAI : MonoBehaviour
 {
     BehaviorTreeRunner BTrunner;
     public Blackboard blackboard = new();
+    SelectorNode rootNode = new("Root Node");
     Vector3 originPos;
 
     [SerializeField] Collider weakPoint;
@@ -25,7 +26,9 @@ public class MonsterAI : MonoBehaviour
     private void Start()
     {
         originPos = transform.position;
-        BTrunner = new BehaviorTreeRunner(BTRunnerInit());
+        //BTrunner = new BehaviorTreeRunner(BTRunnerInit());
+        BlackBoardInit();
+        BTrunner = new BehaviorTreeRunner(BTInit());
     }
 
     void Update()
@@ -33,7 +36,7 @@ public class MonsterAI : MonoBehaviour
         BTrunner?.Operate();
     }
 
-    #region DrawNodeState
+    #region DrawNode
     private void OnGUI()
     {
         if (onGUI)
@@ -67,7 +70,7 @@ public class MonsterAI : MonoBehaviour
         GUILayout.Label(node.name, style);
         GUILayout.EndHorizontal();
 
-        foreach (Node child in node._childs)
+        foreach (Node child in node.childs)
         {
             DrawNode(child, depth + 1);
         }
@@ -75,8 +78,6 @@ public class MonsterAI : MonoBehaviour
     #endregion
     Node BTRunnerInit()
     {
-        Blackboard blackboard = BlackBoardInit();
-
         SelectorNode rootNode = new("Root Node");
 
         SequenceNode dieSequence = new("DieSequence");
@@ -104,8 +105,45 @@ public class MonsterAI : MonoBehaviour
         return rootNode;
     }
 
+    Node BTInit()
+    {
+        DieSequenceSet();
+        SkillCoolDownNodeSet();
+        MeleeAttackCoolDownNodeSet();
+        WeakSequenceSet();
+        DetectedSubTreeSet();
+
+        return rootNode;
+    }
+    void MeleeAttackCoolDownNodeSet()
+    {
+        Node meleeCoolDown = new MeleeAttackCoolDown("MeleeCoolDown", blackboard);
+        rootNode.AddChild(meleeCoolDown);
+    }
+    void SkillCoolDownNodeSet()
+    {
+        Node skillCoolDown = new SkillCoolDown("skillCoolDown", blackboard);
+        rootNode.AddChild(skillCoolDown);
+    }
+    void DieSequenceSet()
+    {
+        SequenceNode dieSequence = new("DieSequence");
+        dieSequence.AddChild(new CheckDie("CheckDie", blackboard));
+        dieSequence.AddChild(new DoDieAction("DoDieAction", blackboard));
+
+        rootNode.AddChild(dieSequence);
+    }
+    void WeakSequenceSet()
+    {
+        SequenceNode hitWeakSequence = new("HitWeakSequence");
+        hitWeakSequence.AddChild(new CheckWeakHit("CheckWeakHit", blackboard));
+        hitWeakSequence.AddChild(new DelayNode("WeakHitDelay", 4f, new DoWeakHitAction("DoWeakHitAction", blackboard)));
+
+        rootNode.AddChild(hitWeakSequence);
+    }
+
     #region 블랙보드Init
-    Blackboard BlackBoardInit()
+    void BlackBoardInit()
     {
         var animator = GetComponent<Animator>();
         var transform = GetComponent<Transform>();
@@ -135,11 +173,22 @@ public class MonsterAI : MonoBehaviour
         blackboard.SetValue("WeakHit", false);
         blackboard.SetValue("SkillReady", false);
         blackboard.SetValue("MeleeAttackReady", false);
-
-        return blackboard;
     }
     #endregion
+    void DetectedSubTreeSet()
+    {
+        SelectorNode dectedSelector = new("DectedSelector");
+        dectedSelector.AddChild(SetSkillNode());
 
+        DetectedNode detectedNode = new("CheckDetected", dectedSelector, blackboard);
+        dectedSelector.AddChild(SetMeleeAttackNode());
+
+        SequenceNode moveSequence = new("MoveSequence");
+        moveSequence.AddChild(new MoveToDetectEnemy("MoveToDetectEnemy", blackboard));
+
+        dectedSelector.AddChild(moveSequence);
+        rootNode.AddChild(detectedNode);
+    }
     void SetDetectedNode(Node rootNode)
     {
         SelectorNode dectedSelector = new("DectedSelector");
@@ -154,13 +203,11 @@ public class MonsterAI : MonoBehaviour
         dectedSelector.AddChild(moveSequence);
         rootNode.AddChild(detectedNode);
     }
-
     Node SetSkillNode()
     {
         SequenceNode skillSequence = new("Skill");
 
         RandomSelectorNode randomSelector = new("RangeAttackRandomSelector");
-
 
         skillSequence.AddChild(new CheckMeleeAttacking("CheckAttacking", blackboard));
         skillSequence.AddChild(new CheckSkillCoolTime("CheckSkillCoolTime",blackboard));

@@ -14,8 +14,8 @@ public class CameraController : MonoBehaviour
     public float sensitivity = 300f;
     public float clampAngle = 40f;
 
-    private float rotX;
-    private float rotY;
+    float rotX;
+    float rotY;
 
     public Transform realCamera;
     public Vector3 dirNormalized;
@@ -24,14 +24,14 @@ public class CameraController : MonoBehaviour
     public float smoothness = 10f;
     bool smoothnessFinish = false;
 
-    private Camera cam;
+    Camera cam;
 
     Coroutine zoomIn;
     Coroutine zoomOut;
 
-    private float zoomSpeed = 10;
-    private float maxZoom = 30;
-    private float defaultZoom;
+    float zoomSpeed = 10;
+    float maxZoom = 30;
+    float defaultZoom;
 
     private void OnEnable()
     {

@@ -8,7 +8,7 @@ public class InverterNode : Node
 
     public override NodeState Evaluate()
     {
-        NodeState state = _childs[0].Evaluate();
+        NodeState state = childs[0].Evaluate();
         if (state == NodeState.Success)
         {
             return NodeState.Failure;

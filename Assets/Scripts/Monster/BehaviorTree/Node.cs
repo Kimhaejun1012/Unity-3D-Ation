@@ -11,7 +11,7 @@ public enum NodeState
 }
 public abstract class Node
 {
-    public List<Node> _childs = new();
+    public List<Node> childs = new();
     public NodeState nodeState;
     public string name;
     protected int childCount;
@@ -22,5 +22,5 @@ public abstract class Node
 
     public abstract NodeState Evaluate();
 
-    public void AddChild(Node node) => _childs.Add(node);
+    public void AddChild(Node node) => childs.Add(node);
 }

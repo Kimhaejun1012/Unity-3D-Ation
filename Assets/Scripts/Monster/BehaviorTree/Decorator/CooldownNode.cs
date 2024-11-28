@@ -7,8 +7,8 @@ using UnityEngine;
 public class CooldownNode : Node
 {
     Node _node;
-    private float cooldownTime;
-    private float curTime;
+    float cooldownTime;
+    float curTime;
 
     StringBuilder coolDown = new StringBuilder();
     public CooldownNode(string name, float cooldown, Node node) : base(name)

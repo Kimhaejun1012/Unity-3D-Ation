@@ -1,42 +1,65 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine.XR;
 
 public sealed class RandomSelectorNode : Node
 {
-    private Random _random;
-    private int? _currentChildIndex;
+    Random random;
+    int? currentChildIndex;
+
+    int count = 0;
 
     public RandomSelectorNode(string name) : base(name)
     {
-        _random = new Random();
-        _currentChildIndex = null;
+        random = new Random();
+        currentChildIndex = null;
     }
 
     public override NodeState Evaluate()
     {
-        if (_childs == null || _childs.Count == 0)
+        if (childs == null || childs.Count == 0)
             return NodeState.Failure;
 
-        if (!_currentChildIndex.HasValue)
-        {
-            _currentChildIndex = _random.Next(_childs.Count);
-        }
 
-        NodeState result = _childs[_currentChildIndex.Value].Evaluate();
+        #region 스킬 1,2,3순서대로 진행 후 랜덤
+        //if (count < childs.Count && !currentChildIndex.HasValue)
+        //{
+        //    currentChildIndex = count;
+        //    count++;
+        //}
+        //else if (!currentChildIndex.HasValue)
+        //{
+        //    currentChildIndex = random.Next(childs.Count);
+        //}
+        #endregion
+        #region 스킬랜덤진행
+        //if (!currentChildIndex.HasValue)
+        //{
+        //    currentChildIndex = random.Next(childs.Count);
+        //}
+        #endregion
+        #region 원하는 스킬 입력
+        if (!currentChildIndex.HasValue)
+        {
+            currentChildIndex = 0;
+        }
+        #endregion
+
+        NodeState result = childs[currentChildIndex.Value].Evaluate();
 
         switch (result)
         {
             case NodeState.Running:
-                _childs[_currentChildIndex.Value].nodeState = NodeState.Running;
+                childs[currentChildIndex.Value].nodeState = NodeState.Running;
                 return NodeState.Running;
             case NodeState.Success:
-                _childs[_currentChildIndex.Value].nodeState = NodeState.Success;
-                _currentChildIndex = null;
+                childs[currentChildIndex.Value].nodeState = NodeState.Success;
+                currentChildIndex = null;
                 break;
             case NodeState.Failure:
-                _childs[_currentChildIndex.Value].nodeState = NodeState.Failure;
-                _currentChildIndex = null;
+                childs[currentChildIndex.Value].nodeState = NodeState.Failure;
+                currentChildIndex = null;
                 break;
         }
         return result;

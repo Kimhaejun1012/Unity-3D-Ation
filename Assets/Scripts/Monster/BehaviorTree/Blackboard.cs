@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Blackboard
 {
-    private Dictionary<string, object> data = new Dictionary<string, object>();
+    Dictionary<string, object> data = new Dictionary<string, object>();
 
     public void SetValue(string key, object value)
     {

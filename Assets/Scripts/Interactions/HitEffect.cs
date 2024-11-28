@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HitEffect : MonoBehaviour
 {
-    private ParticleSystem particle;
+    ParticleSystem particle;
 
     void Awake()
     {

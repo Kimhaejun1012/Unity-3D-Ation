@@ -27,7 +27,7 @@ public class Run : State
 
         moveVec = (moveH + moveV).normalized;
 
-        player.rb.velocity = new Vector3(moveVec.x * applySpeed, player.rb.velocity.y - 1f, moveVec.z * applySpeed);
+        player.rb.velocity = new Vector3(moveVec.x * applySpeed, 0f, moveVec.z * applySpeed);
 
         if (dir != Vector3.zero)
         {

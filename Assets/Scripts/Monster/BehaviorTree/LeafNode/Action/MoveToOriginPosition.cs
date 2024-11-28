@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class MoveToOriginPosition : Node
 {
     Blackboard _blackboard;
-
     Animator animator;
-    private int speed;
+
+    int speed;
     Vector3 _originPos;
     
     public MoveToOriginPosition(string name, Vector3 originPos, Blackboard blackboard) : base(name)

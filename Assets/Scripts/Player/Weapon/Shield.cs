@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Shield : BaseWeapon
 {
-    private bool canParrying = false;
-    private bool canDodge = false;
+    bool canParrying = false;
+    bool canDodge = false;
 
     public GameObject parryingPrefab;
     public GameObject projectile;

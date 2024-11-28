@@ -12,30 +12,27 @@ public class MonsterWeapon : MonoBehaviour
         weaponCollider = GetComponent<Collider>();
         weaponCollider.enabled = false;
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    Debug.Log(other.tag);
-    //    Vector3 incomingDirection = transform.position - other.transform.position;
-    //    incomingDirection = incomingDirection.normalized;
-
-    //    Debug.Log(incomingDirection);
-
-    //    other.GetComponent<PlayerController>().Hit(incomingDirection);
-    //    other.GetComponent<IDamageable>().TakeDamage(damage);
-    //}
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            Vector3 hitDirection = collision.contacts[0].normal;
-            hitDirection = -hitDirection.normalized;
+        Vector3 incomingDirection = transform.position - other.transform.position;
+        incomingDirection = incomingDirection.normalized;
 
-            collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection, damage);
-        }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
-        {
-        }
+        other.GetComponent<PlayerController>().Hit(incomingDirection, damage);
+
     }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        Vector3 hitDirection = collision.contacts[0].normal;
+    //        hitDirection = -hitDirection.normalized;
+
+    //        collision.gameObject.GetComponent<PlayerController>().Hit(hitDirection, damage);
+    //    }
+    //    else if(collision.gameObject.layer == LayerMask.NameToLayer("Shield"))
+    //    {
+    //    }
+    //}
     //private void OnCollisionStay(Collision collision)
     //{
     //    if (collision.gameObject.tag == "Player")

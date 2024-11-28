@@ -16,8 +16,8 @@ public class WeaponController : MonoBehaviour
     public Transform rightWeaponPoint;
     public Transform leftWeaponPoint;
 
-    private PlayerController player;
-    private PlayerAnimationHandler animationHandler;
+    PlayerController player;
+    PlayerAnimationHandler animationHandler;
     public Transform weaponPackPoint;
 
     public WeaponState state;

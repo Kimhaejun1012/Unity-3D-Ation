@@ -34,16 +34,17 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public Rigidbody rb;
+    [HideInInspector]
+    public Vector3 hitDir;
     public PlayerState state;
+
     PlayerAnimationHandler animationrHandler;
     State currentState;
+    List<State> states = new();
 
     [SerializeField] bool onGUI;
-
-    public bool isKnockBack;
     public LayerMask groundLayer;
-    List<State> states = new();
-    public Vector3 hitDir;
+    public bool isKnockBack;
 
     void Awake()
     {
@@ -113,23 +114,18 @@ public class PlayerController : MonoBehaviour
     }
     public void Hit(Vector3 dir, int damage)
     {
-        hitDir = dir;
         if (!isKnockBack)
         {
+            hitDir = dir;
             GetComponent<IDamageable>().TakeDamage(damage);
-        }
-
-        var hp = GetComponent<PlayerStats>().HP;
-
-        if (hp <= 0)
-        {
-            UIManager.instance.UpdateHearts(0);
-            Die();
-        }
-        else
-        {
-            UIManager.instance.UpdateHearts(hp);
             ChangeState(PlayerState.KnockBack);
+            var hp = GetComponent<PlayerStats>().HP;
+            UIManager.instance.UpdateHearts(hp);
+            if (hp <= 0)
+            {
+                UIManager.instance.UpdateHearts(0);
+                Die();
+            }
         }
     }
     public void Die()

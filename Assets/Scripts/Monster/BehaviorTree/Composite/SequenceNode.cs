@@ -6,10 +6,10 @@ public sealed class SequenceNode : Node
     public SequenceNode(string name) : base(name) { }
     public override NodeState Evaluate()
     {
-        if (_childs == null || _childs.Count == 0)
+        if (childs == null || childs.Count == 0)
             return NodeState.Failure;
 
-        foreach (var child in _childs)
+        foreach (var child in childs)
         {
             switch (child.Evaluate())
             {

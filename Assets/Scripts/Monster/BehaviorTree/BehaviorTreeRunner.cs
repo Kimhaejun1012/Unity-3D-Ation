@@ -18,9 +18,9 @@ public class BehaviorTreeRunner
     }
     public void ResetChildNodeState(Node node)
     {
-        if (node._childs.Count != 0)
+        if (node.childs.Count != 0)
         {
-            foreach (var child in node._childs)
+            foreach (var child in node.childs)
             {
                 ResetChildNodeState(child);
             }
