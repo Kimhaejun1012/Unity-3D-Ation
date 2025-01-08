@@ -21,29 +21,29 @@ public sealed class RandomSelectorNode : Node
         if (childs == null || childs.Count == 0)
             return NodeState.Failure;
 
-
         #region 스킬 1,2,3순서대로 진행 후 랜덤
-        //if (count < childs.Count && !currentChildIndex.HasValue)
+        if (count < childs.Count && !currentChildIndex.HasValue)
+        {
+            currentChildIndex = count;
+            count++;
+        }
+        else if (!currentChildIndex.HasValue)
+        {
+            currentChildIndex = random.Next(childs.Count);
+        }
+        #endregion
+        #region 원하는 스킬 입력
+        //if (!currentChildIndex.HasValue)
         //{
-        //    currentChildIndex = count;
-        //    count++;
-        //}
-        //else if (!currentChildIndex.HasValue)
-        //{
-        //    currentChildIndex = random.Next(childs.Count);
+        //    currentChildIndex = 0;
         //}
         #endregion
+
         #region 스킬랜덤진행
         //if (!currentChildIndex.HasValue)
         //{
         //    currentChildIndex = random.Next(childs.Count);
         //}
-        #endregion
-        #region 원하는 스킬 입력
-        if (!currentChildIndex.HasValue)
-        {
-            currentChildIndex = 0;
-        }
         #endregion
 
         NodeState result = childs[currentChildIndex.Value].Evaluate();

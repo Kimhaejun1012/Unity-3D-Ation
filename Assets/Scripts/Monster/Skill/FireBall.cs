@@ -10,7 +10,7 @@ public class FireBall : MonoBehaviour, IProjectile
 
     Vector3 originScale;
 
-    int damage = 3;
+    int damage = 2;
 
     private void Start()
     {

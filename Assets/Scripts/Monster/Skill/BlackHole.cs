@@ -6,7 +6,7 @@ public class BlackHole : MonoBehaviour, IProjectile
 {
     public bool isShoot = false;
     [SerializeField] float finalSize = 1;
-    public float power = 30f;
+    public float power = 3f;
     Rigidbody rb;
 
     public Transform attacker;

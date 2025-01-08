@@ -37,26 +37,26 @@ public class UIManager : MonoBehaviour
         crossHair.SetActive(!crossHair.activeSelf);
     }
 
-    private void OnGUI()
-    {
-        GUIStyle style = new GUIStyle(GUI.skin.label);
-        style.fontSize = 20;
-        style.normal.textColor = Color.white;
+    //private void OnGUI()
+    //{
+    //    GUIStyle style = new GUIStyle(GUI.skin.label);
+    //    style.fontSize = 20;
+    //    style.normal.textColor = Color.white;
 
-        GUILayout.BeginArea(new Rect(Screen.width - 250, 30, 240, 300));
-        GUILayout.BeginVertical();
+    //    GUILayout.BeginArea(new Rect(Screen.width - 250, 30, 240, 300));
+    //    GUILayout.BeginVertical();
 
-        GUILayout.Label(skillCoolTime, style);
-        GUILayout.Label(meleeCoolTime, style);
+    //    GUILayout.Label(skillCoolTime, style);
+    //    GUILayout.Label(meleeCoolTime, style);
 
-        foreach (var cool in coolDowns)
-        {
-            GUILayout.Label(cool.ToString(), style);
-        }
+    //    foreach (var cool in coolDowns)
+    //    {
+    //        GUILayout.Label(cool.ToString(), style);
+    //    }
 
-        GUILayout.EndVertical();
-        GUILayout.EndArea();
-    }
+    //    GUILayout.EndVertical();
+    //    GUILayout.EndArea();
+    //}
     public void HeartInit(int hp)
     {
         for (int i = 0; i < hp; i++)

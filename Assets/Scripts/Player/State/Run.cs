@@ -27,6 +27,7 @@ public class Run : State
 
         moveVec = (moveH + moveV).normalized;
 
+        if (!animationHandler.GetBool("Attacking"))
         player.rb.velocity = new Vector3(moveVec.x * applySpeed, 0f, moveVec.z * applySpeed);
 
         if (dir != Vector3.zero)

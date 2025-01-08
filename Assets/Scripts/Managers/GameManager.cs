@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
+        Debug.Log("!");
         UIManager.instance.crossHair = crossHair;
         UIManager.instance.heartContainer = heartContainer;
 

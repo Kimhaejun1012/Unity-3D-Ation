@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,5 +14,13 @@ public class AttackedTakeDamege : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         stats.HP -= damage;
+
+        var hpBar = GetComponent<MonsterHpBar>();
+
+        if (hpBar != null)
+        {
+            hpBar.GetDamage(damage);
+        }
     }
+
 }

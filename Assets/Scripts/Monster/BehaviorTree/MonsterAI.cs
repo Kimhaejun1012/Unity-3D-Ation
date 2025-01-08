@@ -65,6 +65,12 @@ public class MonsterAI : MonoBehaviour
         }
 
         int indentSize = 20;
+        int verticalOffset = 50;
+        if (depth == 0)
+        {
+            GUILayout.Space(verticalOffset);
+        }
+
         GUILayout.BeginHorizontal();
         GUILayout.Space(depth * indentSize);
         GUILayout.Label(node.name, style);
@@ -113,6 +119,7 @@ public class MonsterAI : MonoBehaviour
         WeakSequenceSet();
         DetectedSubTreeSet();
 
+        rootNode.AddChild(new MoveToOriginPosition("MoveToOriginPosition", originPos, blackboard));
         return rootNode;
     }
     void MeleeAttackCoolDownNodeSet()
@@ -179,6 +186,7 @@ public class MonsterAI : MonoBehaviour
     {
         SelectorNode dectedSelector = new("DectedSelector");
         dectedSelector.AddChild(SetSkillNode());
+        dectedSelector.AddChild(new CheckSkillCasting("CheckSkillCasting", blackboard));
 
         DetectedNode detectedNode = new("CheckDetected", dectedSelector, blackboard);
         dectedSelector.AddChild(SetMeleeAttackNode());
@@ -193,6 +201,7 @@ public class MonsterAI : MonoBehaviour
     {
         SelectorNode dectedSelector = new("DectedSelector");
         dectedSelector.AddChild(SetSkillNode());
+
 
         DetectedNode detectedNode = new("CheckDetected", dectedSelector, blackboard);
         dectedSelector.AddChild(SetMeleeAttackNode());
@@ -217,16 +226,16 @@ public class MonsterAI : MonoBehaviour
         fireBallSequence.AddChild(new DoFireBallAttackCasting("WaitFireBallAttack", blackboard));
         fireBallSequence.AddChild(new DelayNode("FireBallDelay", fireBallCastingTime, new DoFireBallAttack("FireBall", blackboard)));
 
-        SequenceNode bowAttackSequence = new("BowAttackSequence");
-        bowAttackSequence.AddChild(new DoBowAttackCasting("WaitBowAttack", blackboard));
-        bowAttackSequence.AddChild(new DelayNode("BowDelay", blackHoleCastingTime, new DoBowAttack("BowAttack", blackboard)));
+        SequenceNode BlackHoleSequence = new("BlackHoleSequence");
+        BlackHoleSequence.AddChild(new DoBlackHoleAttackCasting("WaitBlackHoleAttack", blackboard));
+        BlackHoleSequence.AddChild(new DelayNode("BlackHoleDelay", blackHoleCastingTime, new DoBlackHoleAttack("BlackHole", blackboard)));
 
         SequenceNode dashAttackSequence = new("DashAttackSequence");
         dashAttackSequence.AddChild(new DoRushTarget("DoRushTarget", blackboard));
         dashAttackSequence.AddChild(new DoDashAttack("DashAttack", blackboard));
 
         randomSelector.AddChild(fireBallSequence);
-        randomSelector.AddChild(bowAttackSequence);
+        randomSelector.AddChild(BlackHoleSequence);
         randomSelector.AddChild(dashAttackSequence);
 
         return skillSequence;
