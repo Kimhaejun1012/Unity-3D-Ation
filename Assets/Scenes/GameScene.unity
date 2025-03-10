@@ -7925,10 +7925,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weakPoint: {fileID: 5268267032977711367}
-  rangeAttackCoolTime: 10
+  rangeAttackCoolTime: 8
   blackHoleCastingTime: 2
   fireBallCastingTime: 3
-  meleeAttackCoolTime: 8
+  meleeAttackCoolTime: 7
   onGUI: 1
   walkSpeed: 5
   dashSpeed: 15
@@ -7944,7 +7944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2340850eaf6a094c956b84775e18786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10
+  maxHp: 30
 --- !u!114 &5268267032977711363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8049,7 +8049,7 @@ NavMeshAgent:
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295

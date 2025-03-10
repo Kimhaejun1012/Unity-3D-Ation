@@ -14,10 +14,13 @@ public class MonsterWeapon : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Vector3 incomingDirection = transform.position - other.transform.position;
-        incomingDirection = incomingDirection.normalized;
+        if (other.gameObject.tag == "Player")
+        {
+            Vector3 incomingDirection = transform.position - other.transform.position;
+            incomingDirection = incomingDirection.normalized;
 
-        other.GetComponent<PlayerController>().Hit(incomingDirection, damage);
+            other.GetComponent<PlayerController>().Hit(incomingDirection, damage);
+        }
 
     }
     //private void OnCollisionEnter(Collision collision)

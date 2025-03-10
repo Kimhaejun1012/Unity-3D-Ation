@@ -22,6 +22,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] private AudioClip meleeAttackClip;
     [SerializeField] private AudioClip bowReleaseClip;
+    [SerializeField] private AudioClip parryingClip;
 
 
     void Awake()
@@ -68,5 +69,10 @@ public class SoundManager : MonoBehaviour
     public void BowRelease()
     {
         sfxAudio.PlayOneShot(bowReleaseClip);
+    }
+    public void Parrying()
+    {
+        Debug.Log("!");
+        sfxAudio.PlayOneShot(parryingClip);
     }
 }

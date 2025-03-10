@@ -21,7 +21,10 @@ public class CheckMeleeAttacking : Node
         {
             transform = _blackboard.GetValue<Transform>("Transform");
             target = _blackboard.GetValue<Transform>("Target");
-            transform.LookAt(target);
+
+            Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, target.position.z);
+            transform.LookAt(targetPosition);
+
             return NodeState.Running;
         }
         return NodeState.Success;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,12 +31,12 @@ public class GameManager : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Debug.Log("!");
         UIManager.instance.crossHair = crossHair;
         UIManager.instance.heartContainer = heartContainer;
 
         SoundManager.instance.GameSceneEnter();
     }
+
     public void CamZoomStart()
     {
         camZoom.Invoke();

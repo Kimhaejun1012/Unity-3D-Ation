@@ -228,6 +228,7 @@ MonoBehaviour:
   gameSceneClip: {fileID: 8300000, guid: a27c2fa49ae24d84db5e37d5b1b895e4, type: 3}
   meleeAttackClip: {fileID: 8300000, guid: 2da9d229918ba7b4f90ec36ac4c44ae6, type: 3}
   bowReleaseClip: {fileID: 8300000, guid: 089d8f97dd5a3bc4b9482916d7c0266b, type: 3}
+  parryingClip: {fileID: 8300000, guid: e713d6ce1c0c9d54bb5e6acf3c0780e1, type: 3}
 --- !u!82 &156911353
 AudioSource:
   m_ObjectHideFlags: 0

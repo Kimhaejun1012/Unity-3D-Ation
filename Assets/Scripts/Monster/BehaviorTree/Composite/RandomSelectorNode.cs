@@ -35,7 +35,7 @@ public sealed class RandomSelectorNode : Node
         #region 원하는 스킬 입력
         //if (!currentChildIndex.HasValue)
         //{
-        //    currentChildIndex = 0;
+        //    currentChildIndex = 2;
         //}
         #endregion
 

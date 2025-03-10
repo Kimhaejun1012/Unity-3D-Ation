@@ -20,6 +20,7 @@ public class KnockBack : State
 
     public override void Exit()
     {
+        Debug.Log("KnockBack Exit!");
         player.isKnockBack = false;
         curDownTime = 0;
     }

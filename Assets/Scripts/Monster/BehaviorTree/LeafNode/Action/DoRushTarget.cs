@@ -7,7 +7,7 @@ public class DoRushTarget : Node
 {
     Blackboard _blackboard;
     Animator animator;
-
+    NavMeshAgent agent;
     float speed;
     float dashAttackRange = 5f;
 
@@ -15,16 +15,15 @@ public class DoRushTarget : Node
     {
         _blackboard = blackboard;
         animator = _blackboard.GetValue<Animator>("Animator");
-
         speed = _blackboard.GetValue<int>("DashSpeed");
+
+        agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
     }
 
     public override NodeState Evaluate()
     {
         var transform = _blackboard.GetValue<Transform>("Transform");
         var target = _blackboard.GetValue<Transform>("Target");
-        var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
-        agent.speed = speed;
 
         if (animator.GetBool("Attacking"))
         {
@@ -34,8 +33,9 @@ public class DoRushTarget : Node
         if (Vector3.Distance(transform.position, target.position) >= dashAttackRange)
         {
             animator.SetBool("Dash", true);
-            agent.isStopped = false;
+            agent.speed = speed;
             agent.SetDestination(target.position);
+            agent.isStopped = false;
         }
         else if(animator.GetBool("Dash"))
         {
