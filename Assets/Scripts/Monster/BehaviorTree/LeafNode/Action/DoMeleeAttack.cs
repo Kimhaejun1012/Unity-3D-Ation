@@ -22,7 +22,5 @@ public class DoMeleeAttack : Node
         var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
         agent.isStopped = true;
         return NodeState.Success;
-
-        //return NodeState.Success;
     }
 }

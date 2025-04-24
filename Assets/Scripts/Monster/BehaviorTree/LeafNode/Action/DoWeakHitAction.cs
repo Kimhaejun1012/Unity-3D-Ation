@@ -21,10 +21,8 @@ public class DoWeakHitAction : Node
     {
         if (animator != null)
         {
-            Debug.Log("!");
             _blackboard.SetValue("WeakHit", false);
             animator.SetTrigger("Recover");
-            var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
             agent.isStopped = false;
 
             return NodeState.Success;

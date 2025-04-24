@@ -18,7 +18,7 @@ public class DoBlackHoleAttackCasting : Node
     {
         if (animator.GetBool("SkillCasting"))
         {
-            var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent");
+            var agent = _blackboard.GetValue<NavMeshAgent>("NavMeshAgent"); 
             agent.isStopped = true;
         }
         else
@@ -30,6 +30,8 @@ public class DoBlackHoleAttackCasting : Node
 
             transform.LookAt(target);
             skillHandler.DoBlackHoleAttack(castingTime);
+            Debug.Log(castingTime);
+
             animator.SetBool("SkillCasting", true);
             animator.SetTrigger("BowAttackCasting");
         }

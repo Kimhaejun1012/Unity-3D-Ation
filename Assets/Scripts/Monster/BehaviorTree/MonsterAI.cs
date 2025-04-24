@@ -220,6 +220,7 @@ public class MonsterAI : MonoBehaviour
 
         skillSequence.AddChild(new CheckMeleeAttacking("CheckAttacking", blackboard));
         skillSequence.AddChild(new CheckSkillCoolTime("CheckSkillCoolTime",blackboard));
+        skillSequence.AddChild(new CheckWeakState("CheckWeakState",blackboard));
         skillSequence.AddChild(randomSelector);
 
         SequenceNode fireBallSequence = new("FireBallSequence");
@@ -227,6 +228,9 @@ public class MonsterAI : MonoBehaviour
         fireBallSequence.AddChild(new DelayNode("FireBallDelay", fireBallCastingTime, new DoFireBallAttack("FireBall", blackboard)));
 
         SequenceNode BlackHoleSequence = new("BlackHoleSequence");
+
+        //아래 DoSkill코드를 애니메이션에서 실행하게 해야됨 안그러면 스턴 후 애니메이션 쿨타임 돌아서 여기 코드로
+        // 스턴 애니메이션에서 스킬 사용 애니메이션 클립까지 오는데 걸리는 시간을 무시하고 바로 스킬이 시전됨
         BlackHoleSequence.AddChild(new DoBlackHoleAttackCasting("WaitBlackHoleAttack", blackboard));
         BlackHoleSequence.AddChild(new DelayNode("BlackHoleDelay", blackHoleCastingTime, new DoBlackHoleAttack("BlackHole", blackboard)));
 

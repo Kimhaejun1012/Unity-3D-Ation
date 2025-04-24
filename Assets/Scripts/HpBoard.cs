@@ -7,7 +7,7 @@ public class HpBoard : MonoBehaviour
     {
         cam = Camera.main.transform;
     }
-
+    
     void FixedUpdate()
     {
         transform.LookAt(cam);

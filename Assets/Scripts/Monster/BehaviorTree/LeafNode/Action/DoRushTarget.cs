@@ -25,10 +25,10 @@ public class DoRushTarget : Node
         var transform = _blackboard.GetValue<Transform>("Transform");
         var target = _blackboard.GetValue<Transform>("Target");
 
-        if (animator.GetBool("Attacking"))
-        {
-            return NodeState.Failure;
-        }
+        //if (animator.GetBool("Attacking"))
+        //{
+        //    return NodeState.Failure;
+        //}
 
         if (Vector3.Distance(transform.position, target.position) >= dashAttackRange)
         {
